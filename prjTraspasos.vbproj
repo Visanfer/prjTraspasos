@@ -1,0 +1,326 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <ProjectType>Local</ProjectType>
+    <ProductVersion>8.0.30319</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{18F0F7C4-10B6-4AA5-8958-FC46486BCA1A}</ProjectGuid>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ApplicationIcon />
+    <AssemblyKeyContainerName />
+    <AssemblyName>prjTraspasos</AssemblyName>
+    <AssemblyOriginatorKeyFile />
+    <AssemblyOriginatorKeyMode>None</AssemblyOriginatorKeyMode>
+    <DefaultClientScript>JScript</DefaultClientScript>
+    <DefaultHTMLPageLayout>Grid</DefaultHTMLPageLayout>
+    <DefaultTargetSchema>IE50</DefaultTargetSchema>
+    <DelaySign>false</DelaySign>
+    <OutputType>Library</OutputType>
+    <OptionCompare>Binary</OptionCompare>
+    <OptionExplicit>On</OptionExplicit>
+    <OptionStrict>Off</OptionStrict>
+    <RootNamespace>prjTraspasos</RootNamespace>
+    <StartupObject>
+    </StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <MyType>Windows</MyType>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>0.0</OldToolsVersion>
+    <TargetFrameworkProfile />
+    <PublishUrl>http://localhost/prjTraspasos/</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>..\..\dll\</OutputPath>
+    <DocumentationFile>prjTraspasos.xml</DocumentationFile>
+    <BaseAddress>285212672</BaseAddress>
+    <ConfigurationOverrideFile />
+    <DefineConstants />
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <DebugSymbols>true</DebugSymbols>
+    <Optimize>false</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>1</WarningLevel>
+    <NoWarn>42016,42017,42018,42019,42032,42353,42354,42355</NoWarn>
+    <DebugType>full</DebugType>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\</OutputPath>
+    <DocumentationFile>prjTraspasos.xml</DocumentationFile>
+    <BaseAddress>285212672</BaseAddress>
+    <ConfigurationOverrideFile />
+    <DefineConstants />
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <RegisterForComInterop>false</RegisterForComInterop>
+    <RemoveIntegerChecks>false</RemoveIntegerChecks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <WarningLevel>1</WarningLevel>
+    <NoWarn>42016,42017,42018,42019,42032,42353,42354,42355</NoWarn>
+    <DebugType>none</DebugType>
+    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="control">
+      <Name>control</Name>
+      <HintPath>..\..\dll\control.dll</HintPath>
+    </Reference>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="MySql.Data, Version=6.4.4.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\dll\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="prjAlbaranes">
+      <Name>prjAlbaranes</Name>
+      <HintPath>..\..\dll\prjAlbaranes.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="prjAlmacen, Version=4.0.6156.33770, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\dll\prjAlmacen.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="prjArticulos, Version=4.0.4451.32404, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\dll\prjArticulos.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="prjControl">
+      <Name>prjControl</Name>
+      <HintPath>..\..\dll\prjControl.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="prjEmpresas">
+      <Name>prjEmpresas</Name>
+      <HintPath>..\..\dll\prjEmpresas.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="prjGrid, Version=4.0.5476.21675, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\dll\prjGrid.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="prjLibroProv, Version=4.0.5233.18511, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\dll\prjLibroProv.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="prjPedProveedores, Version=4.0.6213.32867, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\dll\prjPedProveedores.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="prjPrinterNet">
+      <Name>prjPrinterNet</Name>
+      <HintPath>..\..\dll\prjPrinterNet.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="prjToolBar">
+      <Name>prjToolBar</Name>
+      <HintPath>..\..\dll\prjToolBar.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System">
+      <Name>System</Name>
+    </Reference>
+    <Reference Include="System.Data">
+      <Name>System.Data</Name>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing">
+      <Name>System.Drawing</Name>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <Name>System.Windows.Forms</Name>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Name>System.XML</Name>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Data" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="clsBusSolTraspasos.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="clsBusTraspasos.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="clsBusTraspasoTemp.vb" />
+    <Compile Include="clsSolTraspaso.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="clsSolTraspasoLin.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="clsTraspaso.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="clsTraspasoLin.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="clsTraspasoTemp.vb" />
+    <Compile Include="dtsTraspaso.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>dtsTraspaso.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="dtsTraspaso.vb">
+      <DependentUpon>dtsTraspaso.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="frmBusSolTraspasos.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmBusTraspasos.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmConfEntradas.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSolTraspasos.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSolTraspasosPendientes.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTraspasos.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="modTraspasos.vb">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="rptSolTraspaso.vb">
+      <DependentUpon>rptSolTraspaso.rpt</DependentUpon>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="rptTraspaso.vb">
+      <DependentUpon>rptTraspaso.rpt</DependentUpon>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Content Include="dtsTraspaso.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>dtsTraspaso.Designer.vb</LastGenOutput>
+    </Content>
+    <EmbeddedResource Include="frmBusSolTraspasos.resx">
+      <DependentUpon>frmBusSolTraspasos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmBusTraspasos.resx">
+      <DependentUpon>frmBusTraspasos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmConfEntradas.resx">
+      <DependentUpon>frmConfEntradas.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSolTraspasos.resx">
+      <DependentUpon>frmSolTraspasos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSolTraspasosPendientes.resx">
+      <DependentUpon>frmSolTraspasosPendientes.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTraspasos.resx">
+      <DependentUpon>frmTraspasos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptSolTraspaso.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptSolTraspaso.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptTraspaso.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptTraspaso.vb</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="dtsTraspaso.xsc">
+      <DependentUpon>dtsTraspaso.xsd</DependentUpon>
+    </None>
+    <None Include="dtsTraspaso.xss">
+      <DependentUpon>dtsTraspaso.xsd</DependentUpon>
+    </None>
+    <None Include="dtsTraspaso.xsx">
+      <DependentUpon>dtsTraspaso.xsd</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+    <Service Include="{CF845C55-C321-4742-B673-E6212D061ED9}" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <PropertyGroup>
+    <PreBuildEvent />
+    <PostBuildEvent />
+  </PropertyGroup>
+</Project>
