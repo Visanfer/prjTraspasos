@@ -11,7 +11,7 @@ Public Class frmConfEntradas
     Inherits System.Windows.Forms.Form
     Private mnEmpresa As Int32      ' empresa de gestion
     Dim moAlmacen As clsAlmacen
-    Dim moEmpContable As clsEmpContable
+
     Dim moBusTraspasos As clsBusTraspasos
     Dim mbPrimeraVez As Boolean
     ' variables de impresion ************************
@@ -20,6 +20,7 @@ Public Class frmConfEntradas
     Dim moImpresora As New prjPrinterNet.clsImpresora   ' Objeto Impresora
     Dim msRaya As String
     Dim mnLineas As Integer
+    Friend WithEvents lblMensaje As Label
     Dim mnOrden As Integer = 1
 
 #Region " Código generado por el Diseñador de Windows Forms "
@@ -66,11 +67,13 @@ Public Class frmConfEntradas
     Friend WithEvents lblDescripcionOrd As System.Windows.Forms.Label
     Friend WithEvents lblCodigoOrd As System.Windows.Forms.Label
     <System.Diagnostics.DebuggerStepThrough()> Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmConfEntradas))
         Me.lblPrograma = New System.Windows.Forms.Label()
         Me.lblDescripcion = New System.Windows.Forms.Label()
         Me.lblTitulo = New System.Windows.Forms.Label()
         Me.panCampos = New System.Windows.Forms.Panel()
+        Me.lblMensaje = New System.Windows.Forms.Label()
         Me.lblDescripcionOrd = New System.Windows.Forms.Label()
         Me.lblCodigoOrd = New System.Windows.Forms.Label()
         Me.cmdBloqueo = New System.Windows.Forms.Button()
@@ -90,7 +93,7 @@ Public Class frmConfEntradas
         Me.lblPrograma.BackColor = System.Drawing.SystemColors.ActiveBorder
         Me.lblPrograma.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lblPrograma.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblPrograma.Location = New System.Drawing.Point(9, 9)
+        Me.lblPrograma.Location = New System.Drawing.Point(4, 2)
         Me.lblPrograma.Name = "lblPrograma"
         Me.lblPrograma.Size = New System.Drawing.Size(727, 32)
         Me.lblPrograma.TabIndex = 46
@@ -102,7 +105,7 @@ Public Class frmConfEntradas
         Me.lblDescripcion.BackColor = System.Drawing.SystemColors.ControlLight
         Me.lblDescripcion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lblDescripcion.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDescripcion.Location = New System.Drawing.Point(9, 41)
+        Me.lblDescripcion.Location = New System.Drawing.Point(4, 34)
         Me.lblDescripcion.Name = "lblDescripcion"
         Me.lblDescripcion.Size = New System.Drawing.Size(727, 24)
         Me.lblDescripcion.TabIndex = 47
@@ -113,7 +116,7 @@ Public Class frmConfEntradas
         Me.lblTitulo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lblTitulo.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTitulo.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.lblTitulo.Location = New System.Drawing.Point(733, 9)
+        Me.lblTitulo.Location = New System.Drawing.Point(728, 2)
         Me.lblTitulo.Name = "lblTitulo"
         Me.lblTitulo.Size = New System.Drawing.Size(273, 56)
         Me.lblTitulo.TabIndex = 45
@@ -123,6 +126,7 @@ Public Class frmConfEntradas
         'panCampos
         '
         Me.panCampos.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.panCampos.Controls.Add(Me.lblMensaje)
         Me.panCampos.Controls.Add(Me.lblDescripcionOrd)
         Me.panCampos.Controls.Add(Me.lblCodigoOrd)
         Me.panCampos.Controls.Add(Me.cmdBloqueo)
@@ -132,10 +136,24 @@ Public Class frmConfEntradas
         Me.panCampos.Controls.Add(Me.Label24)
         Me.panCampos.Controls.Add(Me.lblTraspaso)
         Me.panCampos.Controls.Add(Me.grdLineas)
-        Me.panCampos.Location = New System.Drawing.Point(9, 64)
+        Me.panCampos.Location = New System.Drawing.Point(4, 57)
         Me.panCampos.Name = "panCampos"
         Me.panCampos.Size = New System.Drawing.Size(997, 624)
         Me.panCampos.TabIndex = 44
+        '
+        'lblMensaje
+        '
+        Me.lblMensaje.BackColor = System.Drawing.Color.Red
+        Me.lblMensaje.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.lblMensaje.Font = New System.Drawing.Font("Microsoft Sans Serif", 22.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblMensaje.ForeColor = System.Drawing.Color.White
+        Me.lblMensaje.Location = New System.Drawing.Point(316, 258)
+        Me.lblMensaje.Name = "lblMensaje"
+        Me.lblMensaje.Size = New System.Drawing.Size(303, 71)
+        Me.lblMensaje.TabIndex = 120
+        Me.lblMensaje.Text = "Procesando ..."
+        Me.lblMensaje.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
+        Me.lblMensaje.Visible = False
         '
         'lblDescripcionOrd
         '
@@ -178,7 +196,7 @@ Public Class frmConfEntradas
         'txtDesAlmacen
         '
         Me.txtDesAlmacen.AutoSelec = False
-        Me.txtDesAlmacen.BackColor = System.Drawing.SystemColors.HighlightText
+        Me.txtDesAlmacen.BackColor = System.Drawing.Color.White
         Me.txtDesAlmacen.Blink = False
         Me.txtDesAlmacen.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtDesAlmacen.DesdeCodigo = CType(0, Long)
@@ -207,7 +225,7 @@ Public Class frmConfEntradas
         'txtAlmacen
         '
         Me.txtAlmacen.AutoSelec = False
-        Me.txtAlmacen.BackColor = System.Drawing.SystemColors.HighlightText
+        Me.txtAlmacen.BackColor = System.Drawing.Color.White
         Me.txtAlmacen.Blink = False
         Me.txtAlmacen.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtAlmacen.DesdeCodigo = CType(0, Long)
@@ -258,7 +276,7 @@ Public Class frmConfEntradas
         'lblInfo
         '
         Me.lblInfo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lblInfo.Location = New System.Drawing.Point(9, 691)
+        Me.lblInfo.Location = New System.Drawing.Point(4, 684)
         Me.lblInfo.Name = "lblInfo"
         Me.lblInfo.Size = New System.Drawing.Size(997, 16)
         Me.lblInfo.TabIndex = 43
@@ -268,7 +286,7 @@ Public Class frmConfEntradas
         Me.lblTeclas.BackColor = System.Drawing.SystemColors.ActiveBorder
         Me.lblTeclas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lblTeclas.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTeclas.Location = New System.Drawing.Point(9, 707)
+        Me.lblTeclas.Location = New System.Drawing.Point(4, 700)
         Me.lblTeclas.Name = "lblTeclas"
         Me.lblTeclas.Size = New System.Drawing.Size(997, 24)
         Me.lblTeclas.TabIndex = 42
@@ -277,7 +295,7 @@ Public Class frmConfEntradas
         'frmConfEntradas
         '
         Me.AutoScaleBaseSize = New System.Drawing.Size(5, 13)
-        Me.ClientSize = New System.Drawing.Size(1018, 740)
+        Me.ClientSize = New System.Drawing.Size(1008, 729)
         Me.ControlBox = False
         Me.Controls.Add(Me.lblPrograma)
         Me.Controls.Add(Me.lblDescripcion)
@@ -288,7 +306,9 @@ Public Class frmConfEntradas
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.KeyPreview = True
         Me.MaximizeBox = False
+        Me.MaximumSize = New System.Drawing.Size(1024, 768)
         Me.MinimizeBox = False
+        Me.MinimumSize = New System.Drawing.Size(1024, 768)
         Me.Name = "frmConfEntradas"
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -314,18 +334,21 @@ Public Class frmConfEntradas
         Dim loEmpresa As New clsEmpresa
         loEmpresa.mnCodigo = mnEmpresa
         loEmpresa.mrRecuperaDatos()
-        moEmpContable = New clsEmpContable
-        moEmpContable.mnCodigo = loEmpresa.mnEmpresaContable
-        moEmpContable.mrRecuperaDatos()
-        lblTitulo.Text = moEmpContable.msNombre
+        lblTitulo.Text = loEmpresa.msNombre
         ' **************************************************************************
 
-        Me.ShowDialog()
+        If Me.MdiParent Is Nothing Then
+            Me.ShowDialog()
+        Else
+            Me.Show()
+        End If
 
     End Sub
 
     Private Sub mrPintaFormulario()
         Dim loEmpresa As New prjEmpresas.clsEmpresa
+
+        goProfile.mrRecuperaDatos()
 
         ' pongo los datos de la empresa ********
         loEmpresa.mnCodigo = mnEmpresa
@@ -333,8 +356,8 @@ Public Class frmConfEntradas
         lblPrograma.Text = "TRASPASOS - PENDIENTES"
         lblDescripcion.Text = "LISTA TODOS LOS ARTICULOS TRASPASADOS PENDIENTES DE ACTUALIZAR"
         lblTitulo.Text = loEmpresa.msNombre
-        txtAlmacen.Text = goProfile.mnAlmacenEntradas
-        txtDesAlmacen.Text = mfsDesAlmacen(goProfile.mnAlmacenEntradas)
+        txtAlmacen.Text = goProfile.mnAlmacen
+        txtDesAlmacen.Text = mfsDesAlmacen(goProfile.mnAlmacen)
         lblTeclas.Text = "F1-ORDEN    F5-ACTUALIZAR DATOS    F8-MARCAR LINEA     CTRL+P-IMPRIMIR      ESC-SALIDA"
         ' ***************************************************************
 
@@ -412,7 +435,7 @@ Public Class frmConfEntradas
         moImpresora.mnCodigo = moSelImpresora.mnImpresora
         moImpresora.mrRecuperaDatos()
         ' *********** inicio del proceso de impresion *************************
-        moPrinter.mrInicio(goProfile.msLogin)
+        moPrinter.mrInicio(goProfile.mfsLogin)
         moPrinter.msCola = moImpresora.msCola
         moPrinter.mpbComprimida = True
         moPrinter.mpbProporcional = True
@@ -570,6 +593,10 @@ Public Class frmConfEntradas
                 lnLlave = 137
             Case 9
                 lnLlave = 41
+            Case 12
+                lnLlave = 146
+            Case 13
+                lnLlave = 150
         End Select
 
         If goUsuario.mfbAccesoPermitido(lnLlave, True) Then
@@ -607,6 +634,9 @@ Public Class frmConfEntradas
         Dim loTraspasoLin As clsTraspasoLin
         Dim loTraspaso As clsTraspaso
 
+        lblMensaje.Visible = True
+        lblMensaje.Refresh()
+
         For lnI = 0 To grdLineas.mnFilasDatos - 1
             ' primero veo que tipo de linea es ********************
             lsTipo = grdLineas.marMemoria(7, lnI)
@@ -631,6 +661,10 @@ Public Class frmConfEntradas
                 End If
             End If
         Next
+
+        lblMensaje.Visible = False
+        lblMensaje.Refresh()
+
         ' refresco el estado de las nuevas lineas *******
         If moAlmacen Is Nothing Then Exit Sub
         mrCargaAlmacen(moAlmacen.mnCodigo, Nothing)
@@ -643,6 +677,9 @@ Public Class frmConfEntradas
         Dim lnI As Integer
         Dim loLinea As clsTraspasoLin
         Dim loTraspaso As clsTraspaso
+
+        lblMensaje.Visible = True
+        lblMensaje.Refresh()
 
         If moAlmacen Is Nothing Then moAlmacen = New clsAlmacen
 
@@ -679,7 +716,7 @@ Public Class frmConfEntradas
                 loTraspaso = New clsTraspaso
                 loTraspaso.mnEmpresa = loLinea.mnEmpresa
                 loTraspaso.mnCodigo = loLinea.mnCodigo
-                loTraspaso.mrRecuperaDatos()
+                loTraspaso = moBusTraspasos.mcolTraspasos(loTraspaso.mpsCodigo)
 
                 grdLineas.mrAñadirFila()
                 grdLineas.marMemoria(0, lnI) = mfsDesAlmacen(loTraspaso.mnDesde) & " (" & Replace(loTraspaso.msObservaciones, vbCrLf, " ") & ")"
@@ -695,26 +732,13 @@ Public Class frmConfEntradas
                 lnI = lnI + 1
             Next
 
-
-            'For Each loTraspaso In moBusTraspasos.mcolTraspasos
-            '    For Each loLinea In loTraspaso.mcolLineas
-            '        grdLineas.mrAñadirFila()
-            '        grdLineas.marMemoria(0, lnI) = mfsDesAlmacen(loTraspaso.mnDesde) & " (" & loTraspaso.msObservaciones & ")"
-            '        grdLineas.marMemoria(1, lnI) = Format(loTraspaso.mdFecha, "dd/MM/yyyy")
-            '        grdLineas.marMemoria(2, lnI) = loLinea.mnCodigo
-            '        grdLineas.marMemoria(3, lnI) = loLinea.mnArticulo
-            '        grdLineas.marMemoria(4, lnI) = mfsDesArticulo(loLinea.mnArticulo)
-            '        grdLineas.marMemoria(5, lnI) = Format(loLinea.mnCantidad, "#,##0.00")
-            '        grdLineas.marMemoria(6, lnI) = loLinea.mpsCodigo
-            '        grdLineas.marMemoria(7, lnI) = ""
-            '        lnI = lnI + 1
-            '    Next
-            'Next
             ' despues añado una linea nueva que es la que pongo para meter nuevos datos
             grdLineas.mrAñadirFila()
             grdLineas.mrRefrescaGrid()
         End If
 
+        lblMensaje.Visible = False
+        lblMensaje.Refresh()
         lblTraspaso.Text = "****   " & txtDesAlmacen.Text & "   ****"
 
     End Sub

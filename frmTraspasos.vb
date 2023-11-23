@@ -1,4 +1,5 @@
 Option Explicit On
+
 Imports System.Windows.Forms.SendKeys
 Imports prjControl
 Imports prjPrinterNet
@@ -8,7 +9,10 @@ Imports prjAlmacen
 
 Public Class frmTraspasos
     Inherits System.Windows.Forms.Form
+
     Private mnEmpresa As Int32      ' empresa de gestion
+    Public mbCargaDirecta As Boolean = False
+
     Dim WithEvents moTraspaso As clsTraspaso
     Dim WithEvents moTraspasoAux As clsTraspaso
     Dim moAlmacen1 As clsAlmacen
@@ -30,12 +34,15 @@ Public Class frmTraspasos
     Dim mcolLineas As Collection
     ' variables de impresion ************************
     Private WithEvents moSelImpresora As prjControl.frmSelImpresora
-    Dim moPrinter As New clsPrinter       ' objeto para imprimir
     Dim moImpresora As New prjPrinterNet.clsImpresora   ' Objeto Impresora
     Dim mbCompleto As Boolean
     Dim mbCargaAutomatica As Boolean = False
     Dim mbConsultaTraspaso As Boolean = False
     Dim moDataTraspaso As dtsTraspaso
+    Dim moBusSolTraspasos As clsBusSolTraspasos
+    Dim mcolOperarios As New Collection
+
+    Friend WithEvents Label11 As System.Windows.Forms.Label
     Friend WithEvents grpFechas As System.Windows.Forms.GroupBox
     Friend WithEvents lblOperarioEnvio As System.Windows.Forms.Label
     Friend WithEvents txtOperarioEnvia As control.txtVisanfer
@@ -45,8 +52,6 @@ Public Class frmTraspasos
     Friend WithEvents txtFechaEnvio As control.txtVisanfer
     Friend WithEvents lblFechaEnvio As System.Windows.Forms.Label
     Friend WithEvents txtFechaGrabacion As control.txtVisanfer
-    Friend WithEvents Label11 As System.Windows.Forms.Label
-    Dim moBusSolTraspasos As clsBusSolTraspasos
     Friend WithEvents cmdEnviado As System.Windows.Forms.Button
     Friend WithEvents grpEnvio As System.Windows.Forms.GroupBox
     Friend WithEvents grpRecibo As System.Windows.Forms.GroupBox
@@ -56,7 +61,8 @@ Public Class frmTraspasos
     Friend WithEvents txtFechaRecepcion As control.txtVisanfer
     Friend WithEvents lblFechaRecepcion As System.Windows.Forms.Label
     Friend WithEvents lblConfirmado As Label
-    Dim mcolOperarios As New Collection
+    Friend WithEvents panTitulo As Panel
+    Friend WithEvents lblTitle As Label
 
 #Region " Código generado por el Diseñador de Windows Forms "
 
@@ -192,10 +198,13 @@ Public Class frmTraspasos
         Me.tmrAviso = New System.Windows.Forms.Timer(Me.components)
         Me.lblSolicitudes = New System.Windows.Forms.Label()
         Me.tmrSolicitud = New System.Windows.Forms.Timer(Me.components)
+        Me.panTitulo = New System.Windows.Forms.Panel()
+        Me.lblTitle = New System.Windows.Forms.Label()
         Me.panCampos.SuspendLayout()
         Me.grpRecibo.SuspendLayout()
         Me.grpEnvio.SuspendLayout()
         Me.grpFechas.SuspendLayout()
+        Me.panTitulo.SuspendLayout()
         Me.SuspendLayout()
         '
         'lblPrograma
@@ -203,7 +212,7 @@ Public Class frmTraspasos
         Me.lblPrograma.BackColor = System.Drawing.SystemColors.ActiveBorder
         Me.lblPrograma.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lblPrograma.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblPrograma.Location = New System.Drawing.Point(8, 8)
+        Me.lblPrograma.Location = New System.Drawing.Point(12, 34)
         Me.lblPrograma.Name = "lblPrograma"
         Me.lblPrograma.Size = New System.Drawing.Size(673, 32)
         Me.lblPrograma.TabIndex = 39
@@ -251,7 +260,7 @@ Public Class frmTraspasos
         Me.panCampos.Controls.Add(Me.txtCodigo)
         Me.panCampos.Controls.Add(Me.Label3)
         Me.panCampos.Controls.Add(Me.Label1)
-        Me.panCampos.Location = New System.Drawing.Point(8, 88)
+        Me.panCampos.Location = New System.Drawing.Point(12, 114)
         Me.panCampos.Name = "panCampos"
         Me.panCampos.Size = New System.Drawing.Size(1001, 608)
         Me.panCampos.TabIndex = 37
@@ -317,6 +326,7 @@ Public Class frmTraspasos
         Me.txtOperarioRecibe.HastaFecha = New Date(CType(0, Long))
         Me.txtOperarioRecibe.Location = New System.Drawing.Point(105, 84)
         Me.txtOperarioRecibe.MaxLength = 30
+        Me.txtOperarioRecibe.moBlink = Nothing
         Me.txtOperarioRecibe.Name = "txtOperarioRecibe"
         Me.txtOperarioRecibe.ReadOnly = True
         Me.txtOperarioRecibe.Size = New System.Drawing.Size(257, 20)
@@ -338,6 +348,7 @@ Public Class frmTraspasos
         Me.txtFechaRecepcion.HastaFecha = New Date(CType(0, Long))
         Me.txtFechaRecepcion.Location = New System.Drawing.Point(158, 61)
         Me.txtFechaRecepcion.MaxLength = 10
+        Me.txtFechaRecepcion.moBlink = Nothing
         Me.txtFechaRecepcion.Name = "txtFechaRecepcion"
         Me.txtFechaRecepcion.Size = New System.Drawing.Size(204, 20)
         Me.txtFechaRecepcion.TabIndex = 113
@@ -402,6 +413,7 @@ Public Class frmTraspasos
         Me.txtFechaEnvio.HastaFecha = New Date(CType(0, Long))
         Me.txtFechaEnvio.Location = New System.Drawing.Point(158, 60)
         Me.txtFechaEnvio.MaxLength = 10
+        Me.txtFechaEnvio.moBlink = Nothing
         Me.txtFechaEnvio.Name = "txtFechaEnvio"
         Me.txtFechaEnvio.Size = New System.Drawing.Size(204, 20)
         Me.txtFechaEnvio.TabIndex = 9
@@ -422,6 +434,7 @@ Public Class frmTraspasos
         Me.txtOperarioEnvia.HastaFecha = New Date(CType(0, Long))
         Me.txtOperarioEnvia.Location = New System.Drawing.Point(105, 86)
         Me.txtOperarioEnvia.MaxLength = 30
+        Me.txtOperarioEnvia.moBlink = Nothing
         Me.txtOperarioEnvia.Name = "txtOperarioEnvia"
         Me.txtOperarioEnvia.ReadOnly = True
         Me.txtOperarioEnvia.Size = New System.Drawing.Size(257, 20)
@@ -475,6 +488,7 @@ Public Class frmTraspasos
         Me.txtOperarioGraba.HastaFecha = New Date(CType(0, Long))
         Me.txtOperarioGraba.Location = New System.Drawing.Point(105, 45)
         Me.txtOperarioGraba.MaxLength = 30
+        Me.txtOperarioGraba.moBlink = Nothing
         Me.txtOperarioGraba.Name = "txtOperarioGraba"
         Me.txtOperarioGraba.ReadOnly = True
         Me.txtOperarioGraba.Size = New System.Drawing.Size(257, 20)
@@ -496,6 +510,7 @@ Public Class frmTraspasos
         Me.txtFechaGrabacion.HastaFecha = New Date(CType(0, Long))
         Me.txtFechaGrabacion.Location = New System.Drawing.Point(158, 19)
         Me.txtFechaGrabacion.MaxLength = 10
+        Me.txtFechaGrabacion.moBlink = Nothing
         Me.txtFechaGrabacion.Name = "txtFechaGrabacion"
         Me.txtFechaGrabacion.Size = New System.Drawing.Size(204, 20)
         Me.txtFechaGrabacion.TabIndex = 7
@@ -584,6 +599,7 @@ Public Class frmTraspasos
         Me.txtExpo2.HastaFecha = New Date(CType(0, Long))
         Me.txtExpo2.Location = New System.Drawing.Point(824, 60)
         Me.txtExpo2.MaxLength = 6
+        Me.txtExpo2.moBlink = Nothing
         Me.txtExpo2.Name = "txtExpo2"
         Me.txtExpo2.ReadOnly = True
         Me.txtExpo2.Size = New System.Drawing.Size(43, 20)
@@ -606,6 +622,7 @@ Public Class frmTraspasos
         Me.txtExpo1.HastaFecha = New Date(CType(0, Long))
         Me.txtExpo1.Location = New System.Drawing.Point(824, 20)
         Me.txtExpo1.MaxLength = 6
+        Me.txtExpo1.moBlink = Nothing
         Me.txtExpo1.Name = "txtExpo1"
         Me.txtExpo1.ReadOnly = True
         Me.txtExpo1.Size = New System.Drawing.Size(43, 20)
@@ -693,6 +710,7 @@ Public Class frmTraspasos
         Me.txtExis2.HastaFecha = New Date(CType(0, Long))
         Me.txtExis2.Location = New System.Drawing.Point(760, 60)
         Me.txtExis2.MaxLength = 6
+        Me.txtExis2.moBlink = Nothing
         Me.txtExis2.Name = "txtExis2"
         Me.txtExis2.ReadOnly = True
         Me.txtExis2.Size = New System.Drawing.Size(65, 20)
@@ -715,6 +733,7 @@ Public Class frmTraspasos
         Me.txtExis1.HastaFecha = New Date(CType(0, Long))
         Me.txtExis1.Location = New System.Drawing.Point(760, 20)
         Me.txtExis1.MaxLength = 6
+        Me.txtExis1.moBlink = Nothing
         Me.txtExis1.Name = "txtExis1"
         Me.txtExis1.ReadOnly = True
         Me.txtExis1.Size = New System.Drawing.Size(65, 20)
@@ -736,6 +755,7 @@ Public Class frmTraspasos
         Me.txtVendedor.HastaFecha = New Date(CType(0, Long))
         Me.txtVendedor.Location = New System.Drawing.Point(296, 60)
         Me.txtVendedor.MaxLength = 3
+        Me.txtVendedor.moBlink = Nothing
         Me.txtVendedor.Name = "txtVendedor"
         Me.txtVendedor.Size = New System.Drawing.Size(34, 20)
         Me.txtVendedor.TabIndex = 4
@@ -782,6 +802,7 @@ Public Class frmTraspasos
         Me.txtDesA2.HastaFecha = New Date(CType(0, Long))
         Me.txtDesA2.Location = New System.Drawing.Point(536, 60)
         Me.txtDesA2.MaxLength = 30
+        Me.txtDesA2.moBlink = Nothing
         Me.txtDesA2.Name = "txtDesA2"
         Me.txtDesA2.ReadOnly = True
         Me.txtDesA2.Size = New System.Drawing.Size(226, 20)
@@ -802,6 +823,7 @@ Public Class frmTraspasos
         Me.txtDesA1.HastaFecha = New Date(CType(0, Long))
         Me.txtDesA1.Location = New System.Drawing.Point(536, 20)
         Me.txtDesA1.MaxLength = 30
+        Me.txtDesA1.moBlink = Nothing
         Me.txtDesA1.Name = "txtDesA1"
         Me.txtDesA1.ReadOnly = True
         Me.txtDesA1.Size = New System.Drawing.Size(226, 20)
@@ -822,6 +844,7 @@ Public Class frmTraspasos
         Me.txtHasta.HastaFecha = New Date(CType(0, Long))
         Me.txtHasta.Location = New System.Drawing.Point(496, 60)
         Me.txtHasta.MaxLength = 2
+        Me.txtHasta.moBlink = Nothing
         Me.txtHasta.Name = "txtHasta"
         Me.txtHasta.Size = New System.Drawing.Size(40, 20)
         Me.txtHasta.TabIndex = 3
@@ -841,6 +864,7 @@ Public Class frmTraspasos
         Me.txtDesde.HastaFecha = New Date(CType(0, Long))
         Me.txtDesde.Location = New System.Drawing.Point(496, 20)
         Me.txtDesde.MaxLength = 2
+        Me.txtDesde.moBlink = Nothing
         Me.txtDesde.Name = "txtDesde"
         Me.txtDesde.ReadOnly = True
         Me.txtDesde.Size = New System.Drawing.Size(40, 20)
@@ -870,6 +894,7 @@ Public Class frmTraspasos
         Me.txtOperador.HastaFecha = New Date(CType(0, Long))
         Me.txtOperador.Location = New System.Drawing.Point(88, 60)
         Me.txtOperador.MaxLength = 3
+        Me.txtOperador.moBlink = Nothing
         Me.txtOperador.Name = "txtOperador"
         Me.txtOperador.ReadOnly = True
         Me.txtOperador.Size = New System.Drawing.Size(34, 20)
@@ -899,6 +924,7 @@ Public Class frmTraspasos
         Me.txtEstado.HastaFecha = New Date(CType(0, Long))
         Me.txtEstado.Location = New System.Drawing.Point(952, 92)
         Me.txtEstado.MaxLength = 1
+        Me.txtEstado.moBlink = Nothing
         Me.txtEstado.Name = "txtEstado"
         Me.txtEstado.ReadOnly = True
         Me.txtEstado.Size = New System.Drawing.Size(28, 20)
@@ -928,6 +954,7 @@ Public Class frmTraspasos
         Me.txtComentario.HastaFecha = New Date(CType(0, Long))
         Me.txtComentario.Location = New System.Drawing.Point(156, 92)
         Me.txtComentario.MaxLength = 500
+        Me.txtComentario.moBlink = Nothing
         Me.txtComentario.Multiline = True
         Me.txtComentario.Name = "txtComentario"
         Me.txtComentario.Size = New System.Drawing.Size(713, 97)
@@ -956,6 +983,7 @@ Public Class frmTraspasos
         Me.txtFecha.HastaFecha = New Date(CType(0, Long))
         Me.txtFecha.Location = New System.Drawing.Point(296, 20)
         Me.txtFecha.MaxLength = 10
+        Me.txtFecha.moBlink = Nothing
         Me.txtFecha.Name = "txtFecha"
         Me.txtFecha.Size = New System.Drawing.Size(72, 20)
         Me.txtFecha.TabIndex = 1
@@ -975,6 +1003,7 @@ Public Class frmTraspasos
         Me.txtCodigo.HastaFecha = New Date(CType(0, Long))
         Me.txtCodigo.Location = New System.Drawing.Point(88, 20)
         Me.txtCodigo.MaxLength = 6
+        Me.txtCodigo.moBlink = Nothing
         Me.txtCodigo.Name = "txtCodigo"
         Me.txtCodigo.Size = New System.Drawing.Size(64, 20)
         Me.txtCodigo.TabIndex = 0
@@ -1003,7 +1032,7 @@ Public Class frmTraspasos
         Me.lblDescripcion.BackColor = System.Drawing.SystemColors.ControlLight
         Me.lblDescripcion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lblDescripcion.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblDescripcion.Location = New System.Drawing.Point(8, 40)
+        Me.lblDescripcion.Location = New System.Drawing.Point(12, 66)
         Me.lblDescripcion.Name = "lblDescripcion"
         Me.lblDescripcion.Size = New System.Drawing.Size(673, 24)
         Me.lblDescripcion.TabIndex = 40
@@ -1015,7 +1044,7 @@ Public Class frmTraspasos
         Me.lblTitulo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lblTitulo.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTitulo.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(0, Byte), Integer))
-        Me.lblTitulo.Location = New System.Drawing.Point(681, 8)
+        Me.lblTitulo.Location = New System.Drawing.Point(685, 34)
         Me.lblTitulo.Name = "lblTitulo"
         Me.lblTitulo.Size = New System.Drawing.Size(328, 56)
         Me.lblTitulo.TabIndex = 38
@@ -1027,7 +1056,7 @@ Public Class frmTraspasos
         Me.lblTeclas.BackColor = System.Drawing.SystemColors.ActiveBorder
         Me.lblTeclas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lblTeclas.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTeclas.Location = New System.Drawing.Point(8, 696)
+        Me.lblTeclas.Location = New System.Drawing.Point(12, 722)
         Me.lblTeclas.Name = "lblTeclas"
         Me.lblTeclas.Size = New System.Drawing.Size(1001, 40)
         Me.lblTeclas.TabIndex = 35
@@ -1036,7 +1065,7 @@ Public Class frmTraspasos
         'tabMenu
         '
         Me.tabMenu.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.tabMenu.Location = New System.Drawing.Point(8, 64)
+        Me.tabMenu.Location = New System.Drawing.Point(12, 90)
         Me.tabMenu.Name = "tabMenu"
         Me.tabMenu.Size = New System.Drawing.Size(1001, 24)
         Me.tabMenu.TabIndex = 0
@@ -1050,7 +1079,7 @@ Public Class frmTraspasos
         Me.lblSolicitudes.BackColor = System.Drawing.Color.Red
         Me.lblSolicitudes.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lblSolicitudes.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblSolicitudes.Location = New System.Drawing.Point(508, 40)
+        Me.lblSolicitudes.Location = New System.Drawing.Point(512, 66)
         Me.lblSolicitudes.Name = "lblSolicitudes"
         Me.lblSolicitudes.Size = New System.Drawing.Size(173, 24)
         Me.lblSolicitudes.TabIndex = 41
@@ -1062,11 +1091,34 @@ Public Class frmTraspasos
         '
         Me.tmrSolicitud.Interval = 500
         '
+        'panTitulo
+        '
+        Me.panTitulo.BackColor = System.Drawing.Color.FromArgb(CType(CType(13, Byte), Integer), CType(CType(93, Byte), Integer), CType(CType(142, Byte), Integer))
+        Me.panTitulo.Controls.Add(Me.lblTitle)
+        Me.panTitulo.Dock = System.Windows.Forms.DockStyle.Top
+        Me.panTitulo.Location = New System.Drawing.Point(0, 0)
+        Me.panTitulo.Name = "panTitulo"
+        Me.panTitulo.Size = New System.Drawing.Size(1024, 30)
+        Me.panTitulo.TabIndex = 42
+        '
+        'lblTitle
+        '
+        Me.lblTitle.AutoSize = True
+        Me.lblTitle.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblTitle.ForeColor = System.Drawing.Color.White
+        Me.lblTitle.Location = New System.Drawing.Point(9, 9)
+        Me.lblTitle.Name = "lblTitle"
+        Me.lblTitle.Size = New System.Drawing.Size(156, 13)
+        Me.lblTitle.TabIndex = 1
+        Me.lblTitle.Text = "NOMBRE DEL OPERARIO"
+        Me.lblTitle.TextAlign = System.Drawing.ContentAlignment.MiddleLeft
+        '
         'frmTraspasos
         '
         Me.AutoScaleBaseSize = New System.Drawing.Size(5, 13)
-        Me.ClientSize = New System.Drawing.Size(1016, 741)
+        Me.ClientSize = New System.Drawing.Size(1024, 768)
         Me.ControlBox = False
+        Me.Controls.Add(Me.panTitulo)
         Me.Controls.Add(Me.lblSolicitudes)
         Me.Controls.Add(Me.tabMenu)
         Me.Controls.Add(Me.lblPrograma)
@@ -1074,7 +1126,10 @@ Public Class frmTraspasos
         Me.Controls.Add(Me.lblDescripcion)
         Me.Controls.Add(Me.lblTitulo)
         Me.Controls.Add(Me.lblTeclas)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.KeyPreview = True
+        Me.MaximumSize = New System.Drawing.Size(1024, 768)
+        Me.MinimumSize = New System.Drawing.Size(1024, 768)
         Me.Name = "frmTraspasos"
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -1087,6 +1142,8 @@ Public Class frmTraspasos
         Me.grpEnvio.PerformLayout()
         Me.grpFechas.ResumeLayout(False)
         Me.grpFechas.PerformLayout()
+        Me.panTitulo.ResumeLayout(False)
+        Me.panTitulo.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1140,7 +1197,7 @@ Public Class frmTraspasos
 
 #Region " Funciones y Rutinas varias "
 
-    Public Sub mrCrearTraspasoNuevo(ByVal lnEmpresa As Integer, _
+    Public Sub mrCrearTraspasoNuevo(ByVal lnEmpresa As Integer,
                                   ByRef loUsuario As clsUsuario, ByRef loTraspaso As clsTraspaso)
         ' cargo los datos del nuevo pedido y lo paso a nuevo registro ******
         moTraspasoAux = loTraspaso
@@ -1149,7 +1206,7 @@ Public Class frmTraspasos
 
     End Sub
 
-    Public Sub mrConsultaTraspaso(ByVal lnEmpresa As Integer, _
+    Public Sub mrConsultaTraspaso(ByVal lnEmpresa As Integer,
                                   ByRef loUsuario As clsUsuario, ByRef loTraspaso As clsTraspaso)
         ' cargo los datos del traspaso y lo consulto
         moTraspasoAux = loTraspaso
@@ -1177,11 +1234,18 @@ Public Class frmTraspasos
         lblTitulo.Text = moEmpContable.msNombre
         ' **************************************************************************
 
-        Me.ShowDialog()
+        If Me.MdiParent Is Nothing Then
+            Me.ShowDialog()
+        Else
+            Me.Show()
+        End If
+
 
     End Sub
 
     Private Function mfoOperario(ByVal lnOperario As Integer) As clsUsuario
+
+        If mcolLineas Is Nothing Then mcolLineas = New Collection
 
         Dim loOperario As New clsUsuario
         loOperario.mnCodigo = lnOperario
@@ -1320,6 +1384,7 @@ Public Class frmTraspasos
             Case Keys.M And e.Control = True     'CONTROL + M
                 mrMantenimiento()
             Case Keys.Escape
+
                 If Not mbGrabando Then
                     If lsControl = "grdLineas" Then
                         If mtEstado = EstadoVentana.Lineas Then
@@ -1327,16 +1392,23 @@ Public Class frmTraspasos
                         End If
                         txtCodigo.Focus()
                     Else
-                        mrConsulta()
-                        mtEstado = EstadoVentana.Salida
-                        mrLimpiaFormulario()
-                        If mbCargaAutomatica Or mbConsultaTraspaso Then
+
+                        If mbCargaDirecta Then
                             Me.Close()
                         Else
-                            tabMenu.evtFocus()
+                            mrConsulta()
+                            mtEstado = EstadoVentana.Salida
+                            mrLimpiaFormulario()
+                            If mbCargaAutomatica Or mbConsultaTraspaso Then
+                                Me.Close()
+                            Else
+                                tabMenu.evtFocus()
+                            End If
                         End If
+
                     End If
                 End If
+
             Case Keys.Enter
                 Select Case lsControl
                     Case "grdLineas"
@@ -1404,16 +1476,64 @@ Public Class frmTraspasos
                     Case "txtCodigo"
                         If mtEstado = EstadoVentana.Consulta Then mrBuscaTraspaso()
                     Case "grdLineas"
-                        If (mtEstado <> EstadoVentana.Consulta) And (grdLineas.mnCol = 0) Then mrBuscaArticulos()
+                        If (mtEstado <> EstadoVentana.Consulta) And (grdLineas.mnCol = 0) Then mrBuscaArticulosNuevo()
                 End Select
         End Select
+
+    End Sub
+
+    Private Sub mrBuscaArticulosNuevo()
+
+        Dim loBuscadorArticulos As New frmBuscadorArticulos
+        loBuscadorArticulos.mnEmpresa = mnEmpresa
+        loBuscadorArticulos.mbMultiple = True
+        loBuscadorArticulos.mrCargar()
+
+        If loBuscadorArticulos.mnSeleccionados > 0 Then
+
+            Dim lnFila As Integer
+            Dim lnInicio As Integer
+            Dim loArticulo As clsArticulo
+            Dim lnContador As Integer = 0
+
+            lnFila = grdLineas.mnRow
+            lnInicio = lnFila
+            For Each loArticulo In loBuscadorArticulos.mcolSeleccionados
+                If lnContador > 0 Then grdLineas.mrAñadirFila()
+                lnContador = lnContador + 1
+
+                If loArticulo.mnDetalle > 0 Then
+                    grdLineas.marMemoria(0, lnFila) = loArticulo.mnCodigo & "." & loArticulo.mnDetalle
+                Else
+                    grdLineas.marMemoria(0, lnFila) = loArticulo.mnCodigo
+                End If
+                grdLineas.marMemoria(1, lnFila) = loArticulo.msDescripcion
+                grdLineas.marMemoria(2, lnFila) = "0"
+                mrPendiente(lnFila, "S")
+                'grdLineas.mrAñadirFila()
+                lnFila = lnFila + 1
+            Next
+            If lnContador = 0 Then
+                If moArticulo.mnDetalle > 0 Then
+                    grdLineas.marMemoria(0, lnFila) = moArticulo.mnCodigo & "." & moArticulo.mnDetalle
+                Else
+                    grdLineas.marMemoria(0, lnFila) = moArticulo.mnCodigo
+                End If
+                grdLineas.marMemoria(1, lnFila) = moArticulo.msDescripcion
+                grdLineas.marMemoria(2, lnFila) = "0"
+                mfbCargaArticulo(moArticulo.msDescripcion)
+            End If
+            grdLineas.mrRefrescaGrid()
+            grdLineas.mrPonFoco(0, lnInicio + 1)
+
+        End If
 
     End Sub
 
     Private Sub mrMarcarRecibido()
 
         If Not moTraspaso.mbEsNuevo Then
-            If goProfile.mnAlmacenEntradas <> moTraspaso.mnHasta Then
+            If goProfile.mnAlmacen <> moTraspaso.mnHasta Then
                 MsgBox("EL TRASPASO SOLO SE PUEDE MARCAR COMO RECIBIDO DESDE EL ALMACEN DE DESTINO", MsgBoxStyle.Information, "Visanfer.Net")
                 Exit Sub
             End If
@@ -1438,7 +1558,7 @@ Public Class frmTraspasos
     Private Sub mrMarcarEnviado()
 
         If Not moTraspaso.mbEsNuevo Then
-            If goProfile.mnAlmacenEntradas <> moTraspaso.mnDesde Then
+            If goProfile.mnAlmacen <> moTraspaso.mnDesde Then
                 MsgBox("EL TRASPASO SOLO SE PUEDE MARCAR COMO ENVIADO DESDE EL ALMACEN DE ORIGEN", MsgBoxStyle.Information, "Visanfer.Net")
                 Exit Sub
             End If
@@ -1496,9 +1616,9 @@ Public Class frmTraspasos
                     If loExistencias.mnExistencias < (lnCantidad * loAgrArt.mnExistencias) Then
                         Dim loAviso As New frmAvisoControl
                         loAviso.msAviso = "¡¡¡ ATENCION !!!"
-                        loAviso.msMensaje = "ATENCION: EN ESTE MOMENTO NO HAY EXISTENCIAS DE ESTE " & vbCrLf & _
-                                            "ARTICULO. REVISE EL ARTICULO Y LAS EXISTENCIAS DEL MISMO " & vbCrLf & _
-                                            "O REVISE EL ALMACEN DE SALIDA. SI TIENE ALGUNA INCIDENCIA " & vbCrLf & _
+                        loAviso.msMensaje = "ATENCION: EN ESTE MOMENTO NO HAY EXISTENCIAS DE ESTE " & vbCrLf &
+                                            "ARTICULO. REVISE EL ARTICULO Y LAS EXISTENCIAS DEL MISMO " & vbCrLf &
+                                            "O REVISE EL ALMACEN DE SALIDA. SI TIENE ALGUNA INCIDENCIA " & vbCrLf &
                                             "AVISE A EMILIO O SOLANO. " & vbCrLf
                         loAviso.msMensaje = loAviso.msMensaje & " (EXISTENCIAS: " & Format(loExistencias.mnExistencias, "#,##0.00") & ")"
                         loAviso.msTeclas = "PULSE (F5) PARA SALIR"
@@ -1529,9 +1649,9 @@ Public Class frmTraspasos
             If loExistencias.mnExistencias < lnCantidad Then
                 Dim loAviso As New frmAvisoControl
                 loAviso.msAviso = "¡¡¡ ATENCION !!!"
-                loAviso.msMensaje = "ATENCION: EN ESTE MOMENTO NO HAY EXISTENCIAS DE ESTE " & vbCrLf & _
-                                    "ARTICULO. REVISE EL ARTICULO Y LAS EXISTENCIAS DEL MISMO " & vbCrLf & _
-                                    "O REVISE EL ALMACEN DE SALIDA. SI TIENE ALGUNA INCIDENCIA " & vbCrLf & _
+                loAviso.msMensaje = "ATENCION: EN ESTE MOMENTO NO HAY EXISTENCIAS DE ESTE " & vbCrLf &
+                                    "ARTICULO. REVISE EL ARTICULO Y LAS EXISTENCIAS DEL MISMO " & vbCrLf &
+                                    "O REVISE EL ALMACEN DE SALIDA. SI TIENE ALGUNA INCIDENCIA " & vbCrLf &
                                     "AVISE A EMILIO O SOLANO. " & vbCrLf
                 loAviso.msMensaje = loAviso.msMensaje & " (EXISTENCIAS: " & Format(loExistencias.mnExistencias, "#,##0.00") & ")"
                 loAviso.msTeclas = "PULSE (F5) PARA SALIR"
@@ -1551,10 +1671,10 @@ Public Class frmTraspasos
                     Else
                         Dim loAviso As New frmAvisoControl
                         loAviso.msAviso = "¡¡¡ ATENCION !!!"
-                        loAviso.msMensaje = "ATENCION: CASI SEGURO QUE SE ESTA EQUIVOCANDO DE ALMACEN. " & vbCrLf & _
-                                            "REVISE EL ALMACEN DE VENTA DE ESTE ALBARAN. EN CASO   " & vbCrLf & _
-                                            "CONTRARIO REVISE LAS EXISTENCIAS DE ESTE ARTICULO EN SU" & vbCrLf & _
-                                            "ALMACEN SUMANDO ADEMAS LAS QUE TIENE EN EXPOSICION. " & _
+                        loAviso.msMensaje = "ATENCION: CASI SEGURO QUE SE ESTA EQUIVOCANDO DE ALMACEN. " & vbCrLf &
+                                            "REVISE EL ALMACEN DE VENTA DE ESTE ALBARAN. EN CASO   " & vbCrLf &
+                                            "CONTRARIO REVISE LAS EXISTENCIAS DE ESTE ARTICULO EN SU" & vbCrLf &
+                                            "ALMACEN SUMANDO ADEMAS LAS QUE TIENE EN EXPOSICION. " &
                                             "(EXISTENCIAS TOTALES:" & Format(loExistencias.mnExistencias, "#,##0.00") & " EN EXPOSICION:" & Format(loExistencias.mnExistencias, "#,##0.00") & ")"
                         loAviso.msTeclas = "PULSE (F5) PARA SALIR"
                         loAviso.mbParpadeo = True
@@ -1575,7 +1695,8 @@ Public Class frmTraspasos
     End Sub
 
     Private Sub moTraspaso_evtBusTraspaso() Handles moTraspaso.evtBusTraspaso
-        lblTeclas.Text = " CTRL-M Modificacion de Datos              CTRL-L Ver Lineas               F1-Alta Nuevo    " & _
+        mrLimpiaFormulario()
+        lblTeclas.Text = " CTRL-M Modificacion de Datos              CTRL-L Ver Lineas               F1-Alta Nuevo    " &
                          "            CTRL-P Imprimir                 CTRL+S Carga Solicitud                ESC-Salida"
         mrMoverCampos(1)
     End Sub
@@ -1598,7 +1719,7 @@ Public Class frmTraspasos
         txtFecha.Text = Format(Now, "dd/MM/yyyy")
         txtOperador.Text = goUsuario.mnCodigo
         txtEstado.Text = "N"
-        txtDesde.Text = goProfile.mnAlmacenEntradas
+        txtDesde.Text = goProfile.mnAlmacen
         mrCargaAlmacen(mfnLong(txtDesde.Text), 1, Nothing)
         lblTeclas.BackColor = Color.GreenYellow
         lblTeclas.Text = "F5-GRABACION                                ESC-SALIDA"
@@ -1654,7 +1775,7 @@ Public Class frmTraspasos
                 Else
                     moTraspaso.mrRecuperaLineas()
                     mrMoverCampos(1)
-                    lblTeclas.Text = " CTRL-M Modificacion de Datos              CTRL-L Ver Lineas               F1-Alta Nuevo    " & _
+                    lblTeclas.Text = " CTRL-M Modificacion de Datos              CTRL-L Ver Lineas               F1-Alta Nuevo    " &
                                      "            CTRL-P Imprimir                 CTRL+S Carga Solicitud                ESC-Salida"
                 End If
             End If
@@ -1686,7 +1807,7 @@ Public Class frmTraspasos
 
     End Sub
 
-    Private Sub mrCargaAlmacen(ByVal lnCodigo As Integer, ByVal lnNumero As Integer, _
+    Private Sub mrCargaAlmacen(ByVal lnCodigo As Integer, ByVal lnNumero As Integer,
                                ByVal e As System.Windows.Forms.KeyEventArgs)
         Dim loAlmacen As clsAlmacen
 
@@ -1780,7 +1901,7 @@ Public Class frmTraspasos
         ' graba toda la carga en la base de datos *****************
 
         mbGrabando = True
-        If mtEstado = EstadoVentana.NuevoRegistro Or _
+        If mtEstado = EstadoVentana.NuevoRegistro Or
            mtEstado = EstadoVentana.Mantenimiento Then
             ' compruebo que los campos obligatorios estan cumplimentados
             If mfbObligatorios(e) Then
@@ -1825,7 +1946,7 @@ Public Class frmTraspasos
                             ' le pongo la captura de eventos porque algunas veces lo hace mal hasta aqui ******
                             System.Windows.Forms.Application.DoEvents()
                             ' ahora lo que hago es lanzar la impresion del pedido ********
-                            Dim lsResult As MsgBoxResult = MsgBox("¿DESEA IMPRIMIR EL TRASPASO?", _
+                            Dim lsResult As MsgBoxResult = MsgBox("¿DESEA IMPRIMIR EL TRASPASO?",
                                         MsgBoxStyle.Information + MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2, "Visanfer .Net")
                             If lsResult = vbYes Then mrImprimirRemoto()
                         End If
@@ -1845,6 +1966,11 @@ Public Class frmTraspasos
     End Sub
 
     Private Sub mrImprimirCopia()
+
+        If moTraspaso Is Nothing Or moTraspaso.mnCodigo = 0 Then
+            MsgBox("¡¡¡ATENCION!!!, DEBES GRABAR PRIMERO.", MsgBoxStyle.Exclamation, "Visanfer.Net")
+            Exit Sub
+        End If
 
         ' reviso si el traspaso esta abierto por el proceso automatico de gestion
         Dim loTraspasoTemp As New clsTraspasoTemp
@@ -1899,7 +2025,7 @@ Public Class frmTraspasos
 
     End Sub
 
-    Private Sub mrImprimirRpt(ByVal lnImpresora As Integer, ByVal lnCopias As Integer, _
+    Private Sub mrImprimirRpt(ByVal lnImpresora As Integer, ByVal lnCopias As Integer,
                               ByVal lsSalida As String, ByVal lsPapel As String)
 
         Dim loLinea As clsTraspasoLin
@@ -1991,34 +2117,55 @@ Public Class frmTraspasos
                     Dim lsCodigo As String = "99" & Format(lnCodigo, "0000000000")
                     lsCodigo = lsCodigo ' & ChecksumEAN13(lsCodigo)
 
-                    loRow("codigobarras") = lsCodigo
+                    loRow("codigobarras") = mfsEan13(lsCodigo)
                 Else
                     Dim lnCodigo As Long = loLinea.mnArticulo * 1000
                     Dim lsCodigo As String = "99" & Format(lnCodigo, "0000000000")
                     lsCodigo = lsCodigo '& ChecksumEAN13(lsCodigo)
 
-                    loRow("codigobarras") = lsCodigo
+                    loRow("codigobarras") = mfsEan13(lsCodigo)
                 End If
             Else
-                loRow("codigobarras") = "00"
+                'loRow("codigobarras") = "00"
+                loRow("codigobarras") = ""
             End If
 
             loTablaLineas.Rows.Add(loRow)
             lnI = lnI + 1
         Next
 
-        Dim loListado As New rptTraspaso
-        loListado.SetDataSource(moDataTraspaso)
+        Dim oReport1 As New Microsoft.Reporting.WinForms.ReportDataSource("Cabecera", loTablaCabecera)
+        Dim oReport2 As New Microsoft.Reporting.WinForms.ReportDataSource("Lineas", loTablaLineas)
+        Dim oReport3 As New Microsoft.Reporting.WinForms.ReportDataSource("Pie", loTablaPie)
 
-        moSelImpresora.msPapel = lsPapel
-        'If lsPapel = "A5" Then moImpresora.msOrientacion = "V"
+        Dim loAsembly As Reflection.Assembly = Reflection.Assembly.GetExecutingAssembly()
+        Dim lsReport As IO.Stream = loAsembly.GetManifestResourceStream("prjTraspasos.rdlcTraspaso.rdlc")
 
-        If moSelImpresora.msDestino = "I" Then
-            prjPrinterNet.mrImprimeReport(goUsuario, CType(loListado, CrystalDecisions.CrystalReports.Engine.ReportDocument), moImpresora, moSelImpresora.mnCopias)
+        If moSelImpresora.msDestino = "V" Then
+
+            Dim loVisor As New frmVisorReport
+            'loVisor.moReport.LocalReport.ReportEmbeddedResource = "prjTraspasos.rdlcTraspaso.rdlc"
+            loVisor.moReport.LocalReport.LoadReportDefinition(lsReport)
+            loVisor.moReport.LocalReport.DataSources.Clear()
+            loVisor.moReport.LocalReport.DataSources.Add(oReport1)
+            loVisor.moReport.LocalReport.DataSources.Add(oReport2)
+            loVisor.moReport.LocalReport.DataSources.Add(oReport3)
+            loVisor.moReport.RefreshReport()
+            loVisor.mrVisualizar("A4", False, moImpresora.msCola)
+
         Else
-            prjPrinterNet.mrVisualizaReport(goUsuario, CType(loListado, CrystalDecisions.CrystalReports.Engine.ReportDocument), moImpresora, moSelImpresora.mnCopias)
-        End If
 
+            Dim loReport As New Microsoft.Reporting.WinForms.LocalReport
+            'loReport.ReportEmbeddedResource = "prjTraspasos.rdlcTraspaso.rdlc"
+            loReport.LoadReportDefinition(lsReport)
+            loReport.DataSources.Clear()
+            loReport.DataSources.Add(oReport1)
+            loReport.DataSources.Add(oReport2)
+            loReport.DataSources.Add(oReport3)
+            loReport.Refresh()
+            print_microsoft_report(loReport, "A4", False, moImpresora.msCola)
+
+        End If
 
         panCampos.Enabled = True
         Cursor = Cursors.Default
@@ -2030,121 +2177,9 @@ Public Class frmTraspasos
         moImpresora.mnEmpresa = mnEmpresa
         moImpresora.mnCodigo = moSelImpresora.mnImpresora
         moImpresora.mrRecuperaDatos()
+
         If moSelImpresora.msPapel <> "" Then moImpresora.msPapel = moSelImpresora.msPapel
-        If moImpresora.msTipo = "L" Then
-            mrImprimirRpt(moImpresora.mnCodigo, moSelImpresora.mnCopias, moSelImpresora.msDestino, moSelImpresora.msPapel)
-        Else
-            mrImprimirTraspaso()
-        End If
-    End Sub
-
-    Private Sub mrImprimirTraspaso()
-        Dim loLinea As clsTraspasoLin
-        Dim lnTopLineas As Integer
-        Dim lnPagina As Integer
-        Dim loMensaje As New frmMensajes
-        Dim loUnidad As prjArticulos.clsUnimed
-        Dim loArticulo As prjArticulos.clsArticulo
-        Dim loBusUnimed As prjArticulos.clsBusUnimed
-        Dim lnLineas As Integer
-
-        ' ******* esta dll necesita que se le pase la conexion ************
-        loMensaje.mrAbrir("Imprimiendo, por favor espere ...")
-
-        ' ******** recupero la cola de la impresora seleccionada **********
-        moImpresora.mnEmpresa = mnEmpresa
-        moImpresora.mnCodigo = moSelImpresora.mnImpresora
-        moImpresora.mrRecuperaDatos()
-        ' *********** inicio del proceso de impresion *************************
-        moPrinter = New clsPrinter
-        moPrinter.msTipoImpresora = moImpresora.msTipo
-        moPrinter.mrInicio(goProfile.msLogin)
-        moPrinter.msCola = moImpresora.msCola
-        moPrinter.mpbComprimida = True
-        moPrinter.mpbProporcional = True
-
-        If moImpresora.mbEsNuevo Then
-            MsgBox("Impresora no instalada", MsgBoxStyle.Critical, "Visanfer .Net")
-        Else
-            ' ********* parametros de impresion ********************
-            lnPagina = 1
-            If moImpresora.msTipo = "L" Then
-                lnTopLineas = 70                ' numero de lineas por pagina
-            Else
-                lnTopLineas = 48                ' numero de lineas por pagina
-            End If
-            'lnTopLineas = 66                ' numero de lineas por pagina
-
-            moPrinter.mpnLineas = lnTopLineas    ' albaranes 48, A4 66
-            moPrinter.mnCopias = moSelImpresora.mnCopias     ' Copias a imprimir
-
-            ' ************  cabecera ************************************
-            mrCabecera(lnPagina)
-            ' ************  lineas del listado **************************
-            loBusUnimed = New prjArticulos.clsBusUnimed
-            loBusUnimed.mnEmpresa = moTraspaso.mnEmpresa
-            lnLineas = 1
-            For Each loLinea In moTraspaso.mcolLineas
-                ' recupero la unidad de medida del articulo ***************
-                loArticulo = New prjArticulos.clsArticulo
-                loArticulo.mnEmpresa = moTraspaso.mnEmpresa
-                loArticulo.mnCodigo = loLinea.mnArticulo
-                loArticulo.mrRecuperaDatos()
-                loUnidad = loBusUnimed.mfoUnimed(loArticulo.mnTipoUnidad)
-                ' ******** impresion **************************************
-                moPrinter.mrPrint(0, loLinea.mnArticulo, 0, 7, modGeneral.Alineacion.Derecha)
-                moPrinter.mrPrint(-1, Format(loLinea.mnCantidad, "#,##0.00"), 12, 10, modGeneral.Alineacion.Derecha)
-                moPrinter.mrPrint(-1, loUnidad.msAbreviatura, 25, 3)
-                moPrinter.mrPrint(-1, loLinea.msDescripcion, 30, 45)
-                ' ************ Control de paginas *************************
-                'If moPrinter.mpnLineaActual > lnTopLineas - 3 Then
-                If lnLineas = 22 Then
-                    lnLineas = 0
-                    moPrinter.mrFormFeed()
-                    lnPagina = lnPagina + 1
-                    mrCabecera(lnPagina)
-                End If
-                lnLineas = lnLineas + 1
-            Next
-
-            ' ************ final del listado *******************************
-            moPrinter.mrFinal()
-
-            If moSelImpresora.msDestino = "I" Then
-                moPrinter.mrImprimir()
-            Else
-                moPrinter.mrVisualizar()
-            End If
-            'Me.Close()
-
-        End If
-
-        loMensaje.mrCerrar()
-
-    End Sub
-
-    Private Sub mrCabecera(ByVal lnPagina As Integer)
-
-        moPrinter.mrPrint(0, "")
-        moPrinter.mrPrint(0, "TRASPASO", 58, 10, modGeneral.Alineacion.Centro)
-
-        If mbCompleto Then
-            moPrinter.mrPrint(-1, "TRASPASO", 83, 15)
-        Else
-            moPrinter.mrPrint(-1, "T R A S P A S O - C O P I A", 78, 27)
-        End If
-        moPrinter.mrPrint(-1, moTraspaso.mnOperario, 128, 3)
-        moPrinter.mrPrint(-1, moTraspaso.mnVendedor, 133, 3)
-
-        moPrinter.mrPrint(0, moTraspaso.mnCodigo, 58, 10, modGeneral.Alineacion.Centro)
-        moPrinter.mrPrint(0, "DESDE ALMACEN: " & txtDesA1.Text, 75, 45)
-        moPrinter.mpnTamaño = modGeneral.Tamaño.cpi_20
-        moPrinter.mrPrint(0, "HASTA ALMACEN: " & txtDesA2.Text, 75, 45)
-        moPrinter.mrPrint(0, "")
-        moPrinter.mrPrint(0, Format(moTraspaso.mdFecha, "dd/MM/yyyy"), 58, 10)
-        moPrinter.mrPrint(-1, "PEDIDO POR: " & moTraspaso.msObservaciones, 75, 42)
-        moPrinter.mrPrint(0, "")
-        moPrinter.mrPrint(0, "")
+        mrImprimirRpt(moImpresora.mnCodigo, moSelImpresora.mnCopias, moSelImpresora.msDestino, moSelImpresora.msPapel)
 
     End Sub
 
@@ -2316,7 +2351,7 @@ Public Class frmTraspasos
         grdLineas.Editable = False
         lblTeclas.BackColor = Color.FromKnownColor(KnownColor.ActiveBorder)
         lblTeclas.ForeColor = Color.Black
-        lblTeclas.Text = " CTRL-M Modificacion de Datos              CTRL-L Ver Lineas               F1-Alta Nuevo    " & _
+        lblTeclas.Text = " CTRL-M Modificacion de Datos              CTRL-L Ver Lineas               F1-Alta Nuevo    " &
                          "            CTRL-P Imprimir                 CTRL+S Carga Solicitud                ESC-Salida"
         lblPrograma.Text = "TRASPASOS"
         lblPrograma.BackColor = Color.FromKnownColor(KnownColor.ActiveBorder)
@@ -2337,7 +2372,7 @@ Public Class frmTraspasos
                 grdLineas.Editable = True
                 lblTeclas.BackColor = Color.Tomato
                 lblTeclas.ForeColor = Color.White
-                lblTeclas.Text = " F1.-INSERTA LINEA          F2.-BORRA LINEA      " & _
+                lblTeclas.Text = " F1.-INSERTA LINEA          F2.-BORRA LINEA      " &
                                  "      F5-.GRABA             ESC-.SALIDA"
                 lblPrograma.Text = "TRASPASOS - MANTENIMIENTO"
                 lblPrograma.BackColor = Color.Tomato
@@ -2352,7 +2387,7 @@ Public Class frmTraspasos
         ' miro si hay solicitudes de traspaso pendientes ***********
         moBusSolTraspasos = New clsBusSolTraspasos
         moBusSolTraspasos.mnEmpresa = mnEmpresa
-        moBusSolTraspasos.mnDesde = goProfile.mnAlmacenEntradas
+        moBusSolTraspasos.mnDesde = goProfile.mnAlmacen
         moBusSolTraspasos.msEstado = "P"
         moBusSolTraspasos.mdDesdeFecha = "01/01/1900"
         moBusSolTraspasos.mdHastaFecha = "31/12/9999"
@@ -2863,7 +2898,14 @@ Public Class frmTraspasos
             tabMenu.Enabled = False
             txtCodigo.Focus()
         Else
-            tabMenu.evtFocus()
+
+            If mbCargaDirecta Then
+                tabMenu.Visible = False
+                mrConsulta()
+            Else
+                tabMenu.evtFocus()
+            End If
+
         End If
 
     End Sub
@@ -2875,7 +2917,7 @@ Public Class frmTraspasos
     Private Sub frmTraspasos_Activated(ByVal sender As Object, ByVal e As System.EventArgs) Handles MyBase.Activated
         If goUsuario Is Nothing Then goUsuario = New clsUsuario
         If goUsuario.mbEsNuevo Then goUsuario.mrBloquear(gnLlave)
-        Me.Text = goUsuario.msNombre
+        lblTitle.Text = goUsuario.msNombre
         mrSolicitudesPendientes()
     End Sub
 
@@ -2936,7 +2978,6 @@ Public Class frmTraspasos
         End If
 
     End Sub
-
 
 #End Region
 

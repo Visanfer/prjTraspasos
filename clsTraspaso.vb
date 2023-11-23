@@ -117,6 +117,8 @@ Public Class clsTraspaso
         'If loLinea.msEstado = "A" Or mnHasta = 9 Then lbActualizaDestino = True  ' me dice gines que no lo ponga directo, que se encarga el
         If loLinea.msEstado = "A" Or (mnDesde = 10 And mnHasta = 11) Then lbActualizaDestino = True
         If loLinea.msEstado = "A" Or (mnDesde = 11 And mnHasta = 10) Then lbActualizaDestino = True
+        If loLinea.msEstado = "A" Or (mnDesde = 1 And mnHasta = 13) Then lbActualizaDestino = True   ' 04-06-2020
+        If loLinea.msEstado = "A" Or mnHasta = 14 Then lbActualizaDestino = True    ' 05/05/2022     TRASPASOS A ONDA
 
         If lbActualizaDestino Then
             ' si el estado de la linea es actualizado, entonces grabo las existencias en destino

@@ -143,7 +143,7 @@ Public Class clsTraspasoLin
         'prjControl.mrGrabaLineaLog("ActuTraspasos.log", lsLog)
 
         If goUsuario Is Nothing Then goUsuario = New clsUsuario
-        If goProfile Is Nothing Then goProfile = New clsProfile
+        If goProfile Is Nothing Then goProfile = New clsprofilelocal
         If goUsuario.mbEsNuevo Then
             goUsuario.mnCodigo = lnUsuario
             goUsuario.mrRecuperaDatos()
@@ -163,7 +163,8 @@ Public Class clsTraspasoLin
             loDetalle.mrRecuperaDatos()
 
             If Not loDetalle.msControlExistencias = "N" Then mnDetalle = 0
-            mnCantidad = mnCantidad * loDetalle.mnCantidadUnidad
+            ' da error en las vigas, lo quito pues en el resto de programas no se hace ************ 13-08-21
+            'mnCantidad = mnCantidad * loDetalle.mnCantidadUnidad
 
         End If
 

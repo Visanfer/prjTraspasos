@@ -6,6 +6,7 @@ Public Class frmSolTraspasosPendientes
     Inherits System.Windows.Forms.Form
     Private mnEmpresa As Int32      ' empresa de gestion
     Private moBusSolTraspasos As New clsBusSolTraspasos
+    Friend WithEvents tmrCargador As Timer
     Private moSolTraspasoAux As New clsSolTraspaso
 
 #Region " Código generado por el Diseñador de Windows Forms "
@@ -54,23 +55,25 @@ Public Class frmSolTraspasosPendientes
     Friend WithEvents OPER As System.Windows.Forms.ColumnHeader
     Friend WithEvents lblPrograma As System.Windows.Forms.Label
     <System.Diagnostics.DebuggerStepThrough()> Private Sub InitializeComponent()
-        Me.lblTeclas = New System.Windows.Forms.Label
-        Me.ESTADO = New System.Windows.Forms.ColumnHeader
-        Me.panCampos = New System.Windows.Forms.Panel
-        Me.grpLineas = New System.Windows.Forms.GroupBox
-        Me.lstLineas = New System.Windows.Forms.ListView
-        Me.ColumnHeader2 = New System.Windows.Forms.ColumnHeader
-        Me.ColumnHeader3 = New System.Windows.Forms.ColumnHeader
-        Me.ColumnHeader4 = New System.Windows.Forms.ColumnHeader
-        Me.ColumnHeader1 = New System.Windows.Forms.ColumnHeader
-        Me.lstBusqueda = New System.Windows.Forms.ListView
-        Me.CODIGO = New System.Windows.Forms.ColumnHeader
-        Me.FECHA = New System.Windows.Forms.ColumnHeader
-        Me.OBS = New System.Windows.Forms.ColumnHeader
-        Me.DESDE = New System.Windows.Forms.ColumnHeader
-        Me.HASTA = New System.Windows.Forms.ColumnHeader
-        Me.OPER = New System.Windows.Forms.ColumnHeader
-        Me.lblPrograma = New System.Windows.Forms.Label
+        Me.components = New System.ComponentModel.Container()
+        Me.lblTeclas = New System.Windows.Forms.Label()
+        Me.ESTADO = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.panCampos = New System.Windows.Forms.Panel()
+        Me.grpLineas = New System.Windows.Forms.GroupBox()
+        Me.lstLineas = New System.Windows.Forms.ListView()
+        Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.lstBusqueda = New System.Windows.Forms.ListView()
+        Me.CODIGO = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.FECHA = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.OBS = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.DESDE = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.HASTA = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.OPER = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.lblPrograma = New System.Windows.Forms.Label()
+        Me.tmrCargador = New System.Windows.Forms.Timer(Me.components)
         Me.panCampos.SuspendLayout()
         Me.grpLineas.SuspendLayout()
         Me.SuspendLayout()
@@ -80,12 +83,12 @@ Public Class frmSolTraspasosPendientes
         Me.lblTeclas.BackColor = System.Drawing.Color.Silver
         Me.lblTeclas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lblTeclas.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTeclas.Location = New System.Drawing.Point(5, 710)
+        Me.lblTeclas.Location = New System.Drawing.Point(1, 703)
         Me.lblTeclas.Name = "lblTeclas"
         Me.lblTeclas.Size = New System.Drawing.Size(1007, 24)
         Me.lblTeclas.TabIndex = 28
-        Me.lblTeclas.Text = "CONFIRMAR - F8                                       CTRL+L - VER LINEAS         " & _
-        "                            ESC - SALIDA"
+        Me.lblTeclas.Text = "CONFIRMAR - F8                                       CTRL+L - VER LINEAS         " &
+    "                            ESC - SALIDA"
         Me.lblTeclas.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'ESTADO
@@ -99,7 +102,7 @@ Public Class frmSolTraspasosPendientes
         Me.panCampos.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.panCampos.Controls.Add(Me.grpLineas)
         Me.panCampos.Controls.Add(Me.lstBusqueda)
-        Me.panCampos.Location = New System.Drawing.Point(5, 40)
+        Me.panCampos.Location = New System.Drawing.Point(1, 35)
         Me.panCampos.Name = "panCampos"
         Me.panCampos.Size = New System.Drawing.Size(1007, 665)
         Me.panCampos.TabIndex = 30
@@ -128,6 +131,8 @@ Public Class frmSolTraspasosPendientes
         Me.lstLineas.Name = "lstLineas"
         Me.lstLineas.Size = New System.Drawing.Size(973, 288)
         Me.lstLineas.TabIndex = 8
+        Me.lstLineas.TabStop = False
+        Me.lstLineas.UseCompatibleStateImageBehavior = False
         Me.lstLineas.View = System.Windows.Forms.View.Details
         '
         'ColumnHeader2
@@ -165,6 +170,7 @@ Public Class frmSolTraspasosPendientes
         Me.lstBusqueda.Name = "lstBusqueda"
         Me.lstBusqueda.Size = New System.Drawing.Size(989, 323)
         Me.lstBusqueda.TabIndex = 7
+        Me.lstBusqueda.UseCompatibleStateImageBehavior = False
         Me.lstBusqueda.View = System.Windows.Forms.View.Details
         '
         'CODIGO
@@ -203,17 +209,20 @@ Public Class frmSolTraspasosPendientes
         Me.lblPrograma.BackColor = System.Drawing.SystemColors.ActiveBorder
         Me.lblPrograma.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lblPrograma.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblPrograma.Location = New System.Drawing.Point(5, 6)
+        Me.lblPrograma.Location = New System.Drawing.Point(1, 1)
         Me.lblPrograma.Name = "lblPrograma"
         Me.lblPrograma.Size = New System.Drawing.Size(1007, 32)
         Me.lblPrograma.TabIndex = 29
         Me.lblPrograma.Text = "SOLICITUDES DE TRASPASO PENDIENTES"
         Me.lblPrograma.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
+        'tmrCargador
+        '
+        '
         'frmSolTraspasosPendientes
         '
         Me.AutoScaleBaseSize = New System.Drawing.Size(5, 13)
-        Me.ClientSize = New System.Drawing.Size(1016, 741)
+        Me.ClientSize = New System.Drawing.Size(1008, 729)
         Me.ControlBox = False
         Me.Controls.Add(Me.lblTeclas)
         Me.Controls.Add(Me.panCampos)
@@ -221,7 +230,9 @@ Public Class frmSolTraspasosPendientes
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.KeyPreview = True
         Me.MaximizeBox = False
+        Me.MaximumSize = New System.Drawing.Size(1024, 768)
         Me.MinimizeBox = False
+        Me.MinimumSize = New System.Drawing.Size(1024, 768)
         Me.Name = "frmSolTraspasosPendientes"
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
@@ -237,12 +248,18 @@ Public Class frmSolTraspasosPendientes
 #Region " Funciones y Rutinas varias "
 
     Public Sub mrCargar(ByVal loBusSolTraspaso As clsBusSolTraspasos)
+
         mrAsignaEventos()
         mnEmpresa = loBusSolTraspaso.mnEmpresa
         moBusSolTraspasos = loBusSolTraspaso
-        mrRellenaList()
-        Send("{DOWN}")
-        Me.ShowDialog()
+        tmrCargador.Enabled = True
+
+        If Me.MdiParent Is Nothing Then
+            Me.ShowDialog()
+        Else
+            Me.Show()
+        End If
+
     End Sub
 
     Private Sub mrAsignaEventos()
@@ -411,6 +428,11 @@ Public Class frmSolTraspasosPendientes
         Next
         lstBusqueda.EndUpdate()
 
+        If lstBusqueda.Items.Count > 0 Then
+            lstBusqueda.Focus()
+            SendKeys.Send("{DOWN}")
+        End If
+
     End Sub
 
 #End Region
@@ -428,6 +450,11 @@ Public Class frmSolTraspasosPendientes
     Private Sub lstBusqueda_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lstBusqueda.SelectedIndexChanged
         mrPasaCodigo()
         mrMoverCampos()
+    End Sub
+
+    Private Sub tmrCargador_Tick(sender As Object, e As EventArgs) Handles tmrCargador.Tick
+        tmrCargador.Enabled = False
+        mrRellenaList()
     End Sub
 
 #End Region

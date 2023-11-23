@@ -100,47 +100,47 @@ Public Class frmSolTraspasos
     Friend WithEvents lblConfirmado As System.Windows.Forms.Label
     Friend WithEvents lblConfirma As System.Windows.Forms.Label
     <System.Diagnostics.DebuggerStepThrough()> Private Sub InitializeComponent()
-        Me.components = New System.ComponentModel.Container
-        Dim resources As System.Resources.ResourceManager = New System.Resources.ResourceManager(GetType(frmSolTraspasos))
-        Me.lblPrograma = New System.Windows.Forms.Label
-        Me.panCampos = New System.Windows.Forms.Panel
-        Me.lblConfirmado = New System.Windows.Forms.Label
-        Me.lblConfirma = New System.Windows.Forms.Label
-        Me.txtDesOperario = New control.txtVisanfer
-        Me.Label9 = New System.Windows.Forms.Label
-        Me.Label10 = New System.Windows.Forms.Label
-        Me.Label8 = New System.Windows.Forms.Label
-        Me.Label6 = New System.Windows.Forms.Label
-        Me.txtExpo1 = New control.txtVisanfer
-        Me.txtExpo2 = New control.txtVisanfer
-        Me.cmdDesbloqueo = New System.Windows.Forms.Button
-        Me.cmdBloqueo = New System.Windows.Forms.Button
-        Me.lblTraspaso = New System.Windows.Forms.Label
-        Me.lblAviso2 = New System.Windows.Forms.Label
-        Me.lblAviso1 = New System.Windows.Forms.Label
-        Me.txtExis1 = New control.txtVisanfer
-        Me.txtExis2 = New control.txtVisanfer
-        Me.Label2 = New System.Windows.Forms.Label
-        Me.grdLineas = New prjGrid.ctlGrid
-        Me.txtDesA1 = New control.txtVisanfer
-        Me.txtDesA2 = New control.txtVisanfer
-        Me.txtDesde = New control.txtVisanfer
-        Me.txtHasta = New control.txtVisanfer
-        Me.Label24 = New System.Windows.Forms.Label
-        Me.txtOperador = New control.txtVisanfer
-        Me.Label7 = New System.Windows.Forms.Label
-        Me.txtEstado = New control.txtVisanfer
-        Me.Label5 = New System.Windows.Forms.Label
-        Me.txtComentario = New control.txtVisanfer
-        Me.Label14 = New System.Windows.Forms.Label
-        Me.txtFecha = New control.txtVisanfer
-        Me.txtCodigo = New control.txtVisanfer
-        Me.Label3 = New System.Windows.Forms.Label
-        Me.Label1 = New System.Windows.Forms.Label
+        Me.components = New System.ComponentModel.Container()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmSolTraspasos))
+        Me.lblPrograma = New System.Windows.Forms.Label()
+        Me.panCampos = New System.Windows.Forms.Panel()
+        Me.lblConfirmado = New System.Windows.Forms.Label()
+        Me.lblConfirma = New System.Windows.Forms.Label()
+        Me.txtDesOperario = New control.txtVisanfer()
+        Me.Label9 = New System.Windows.Forms.Label()
+        Me.Label10 = New System.Windows.Forms.Label()
+        Me.Label8 = New System.Windows.Forms.Label()
+        Me.Label6 = New System.Windows.Forms.Label()
+        Me.txtExpo1 = New control.txtVisanfer()
+        Me.txtExpo2 = New control.txtVisanfer()
+        Me.cmdDesbloqueo = New System.Windows.Forms.Button()
+        Me.cmdBloqueo = New System.Windows.Forms.Button()
+        Me.lblTraspaso = New System.Windows.Forms.Label()
+        Me.lblAviso2 = New System.Windows.Forms.Label()
+        Me.lblAviso1 = New System.Windows.Forms.Label()
+        Me.txtExis1 = New control.txtVisanfer()
+        Me.txtExis2 = New control.txtVisanfer()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.grdLineas = New prjGrid.ctlGrid()
+        Me.txtDesA1 = New control.txtVisanfer()
+        Me.txtDesA2 = New control.txtVisanfer()
+        Me.txtDesde = New control.txtVisanfer()
+        Me.txtHasta = New control.txtVisanfer()
+        Me.Label24 = New System.Windows.Forms.Label()
+        Me.txtOperador = New control.txtVisanfer()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.txtEstado = New control.txtVisanfer()
+        Me.Label5 = New System.Windows.Forms.Label()
+        Me.txtComentario = New control.txtVisanfer()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.txtFecha = New control.txtVisanfer()
+        Me.txtCodigo = New control.txtVisanfer()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
         Me.tmrAviso = New System.Windows.Forms.Timer(Me.components)
-        Me.lblTitulo = New System.Windows.Forms.Label
-        Me.lblInfo = New System.Windows.Forms.Label
-        Me.lblTeclas = New System.Windows.Forms.Label
+        Me.lblTitulo = New System.Windows.Forms.Label()
+        Me.lblInfo = New System.Windows.Forms.Label()
+        Me.lblTeclas = New System.Windows.Forms.Label()
         Me.panCampos.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -149,7 +149,7 @@ Public Class frmSolTraspasos
         Me.lblPrograma.BackColor = System.Drawing.SystemColors.ActiveBorder
         Me.lblPrograma.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lblPrograma.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblPrograma.Location = New System.Drawing.Point(8, 8)
+        Me.lblPrograma.Location = New System.Drawing.Point(2, 1)
         Me.lblPrograma.Name = "lblPrograma"
         Me.lblPrograma.Size = New System.Drawing.Size(661, 56)
         Me.lblPrograma.TabIndex = 46
@@ -192,14 +192,14 @@ Public Class frmSolTraspasos
         Me.panCampos.Controls.Add(Me.txtCodigo)
         Me.panCampos.Controls.Add(Me.Label3)
         Me.panCampos.Controls.Add(Me.Label1)
-        Me.panCampos.Location = New System.Drawing.Point(8, 64)
+        Me.panCampos.Location = New System.Drawing.Point(2, 57)
         Me.panCampos.Name = "panCampos"
         Me.panCampos.Size = New System.Drawing.Size(1004, 632)
         Me.panCampos.TabIndex = 44
         '
         'lblConfirmado
         '
-        Me.lblConfirmado.BackColor = System.Drawing.Color.FromArgb(CType(128, Byte), CType(255, Byte), CType(128, Byte))
+        Me.lblConfirmado.BackColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.lblConfirmado.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lblConfirmado.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblConfirmado.Location = New System.Drawing.Point(852, 264)
@@ -212,7 +212,7 @@ Public Class frmSolTraspasos
         '
         'lblConfirma
         '
-        Me.lblConfirma.BackColor = System.Drawing.Color.FromArgb(CType(255, Byte), CType(128, Byte), CType(128, Byte))
+        Me.lblConfirma.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer))
         Me.lblConfirma.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lblConfirma.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblConfirma.Location = New System.Drawing.Point(852, 400)
@@ -238,9 +238,8 @@ Public Class frmSolTraspasos
         Me.txtDesOperario.Name = "txtDesOperario"
         Me.txtDesOperario.Size = New System.Drawing.Size(236, 20)
         Me.txtDesOperario.TabIndex = 119
-        Me.txtDesOperario.Text = ""
         Me.txtDesOperario.tipo = control.txtVisanfer.TiposCaja.Alfanumerico
-        Me.txtDesOperario.ValorMax = 999999999
+        Me.txtDesOperario.ValorMax = 999999999.0R
         '
         'Label9
         '
@@ -308,10 +307,9 @@ Public Class frmSolTraspasos
         Me.txtExpo1.Size = New System.Drawing.Size(43, 20)
         Me.txtExpo1.TabIndex = 114
         Me.txtExpo1.TabStop = False
-        Me.txtExpo1.Text = ""
         Me.txtExpo1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtExpo1.tipo = control.txtVisanfer.TiposCaja.Numerico
-        Me.txtExpo1.ValorMax = 999999999
+        Me.txtExpo1.ValorMax = 999999999.0R
         '
         'txtExpo2
         '
@@ -331,10 +329,9 @@ Public Class frmSolTraspasos
         Me.txtExpo2.Size = New System.Drawing.Size(43, 20)
         Me.txtExpo2.TabIndex = 113
         Me.txtExpo2.TabStop = False
-        Me.txtExpo2.Text = ""
         Me.txtExpo2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtExpo2.tipo = control.txtVisanfer.TiposCaja.Numerico
-        Me.txtExpo2.ValorMax = 999999999
+        Me.txtExpo2.ValorMax = 999999999.0R
         '
         'cmdDesbloqueo
         '
@@ -406,10 +403,9 @@ Public Class frmSolTraspasos
         Me.txtExis1.Size = New System.Drawing.Size(65, 20)
         Me.txtExis1.TabIndex = 107
         Me.txtExis1.TabStop = False
-        Me.txtExis1.Text = ""
         Me.txtExis1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtExis1.tipo = control.txtVisanfer.TiposCaja.Numerico
-        Me.txtExis1.ValorMax = 999999999
+        Me.txtExis1.ValorMax = 999999999.0R
         '
         'txtExis2
         '
@@ -429,10 +425,9 @@ Public Class frmSolTraspasos
         Me.txtExis2.Size = New System.Drawing.Size(65, 20)
         Me.txtExis2.TabIndex = 106
         Me.txtExis2.TabStop = False
-        Me.txtExis2.Text = ""
         Me.txtExis2.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtExis2.tipo = control.txtVisanfer.TiposCaja.Numerico
-        Me.txtExis2.ValorMax = 999999999
+        Me.txtExis2.ValorMax = 999999999.0R
         '
         'Label2
         '
@@ -470,9 +465,8 @@ Public Class frmSolTraspasos
         Me.txtDesA1.Size = New System.Drawing.Size(277, 20)
         Me.txtDesA1.TabIndex = 101
         Me.txtDesA1.TabStop = False
-        Me.txtDesA1.Text = ""
         Me.txtDesA1.tipo = control.txtVisanfer.TiposCaja.Alfanumerico
-        Me.txtDesA1.ValorMax = 999999999
+        Me.txtDesA1.ValorMax = 999999999.0R
         '
         'txtDesA2
         '
@@ -491,9 +485,8 @@ Public Class frmSolTraspasos
         Me.txtDesA2.Size = New System.Drawing.Size(277, 20)
         Me.txtDesA2.TabIndex = 100
         Me.txtDesA2.TabStop = False
-        Me.txtDesA2.Text = ""
         Me.txtDesA2.tipo = control.txtVisanfer.TiposCaja.Alfanumerico
-        Me.txtDesA2.ValorMax = 999999999
+        Me.txtDesA2.ValorMax = 999999999.0R
         '
         'txtDesde
         '
@@ -510,10 +503,9 @@ Public Class frmSolTraspasos
         Me.txtDesde.Name = "txtDesde"
         Me.txtDesde.Size = New System.Drawing.Size(40, 20)
         Me.txtDesde.TabIndex = 3
-        Me.txtDesde.Text = ""
         Me.txtDesde.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtDesde.tipo = control.txtVisanfer.TiposCaja.Numerico
-        Me.txtDesde.ValorMax = 999999999
+        Me.txtDesde.ValorMax = 999999999.0R
         '
         'txtHasta
         '
@@ -531,10 +523,9 @@ Public Class frmSolTraspasos
         Me.txtHasta.ReadOnly = True
         Me.txtHasta.Size = New System.Drawing.Size(40, 20)
         Me.txtHasta.TabIndex = 2
-        Me.txtHasta.Text = ""
         Me.txtHasta.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtHasta.tipo = control.txtVisanfer.TiposCaja.Numerico
-        Me.txtHasta.ValorMax = 999999999
+        Me.txtHasta.ValorMax = 999999999.0R
         '
         'Label24
         '
@@ -562,10 +553,9 @@ Public Class frmSolTraspasos
         Me.txtOperador.Size = New System.Drawing.Size(34, 20)
         Me.txtOperador.TabIndex = 4
         Me.txtOperador.TabStop = False
-        Me.txtOperador.Text = ""
         Me.txtOperador.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtOperador.tipo = control.txtVisanfer.TiposCaja.Alfanumerico
-        Me.txtOperador.ValorMax = 999999999
+        Me.txtOperador.ValorMax = 999999999.0R
         '
         'Label7
         '
@@ -592,10 +582,9 @@ Public Class frmSolTraspasos
         Me.txtEstado.Size = New System.Drawing.Size(28, 20)
         Me.txtEstado.TabIndex = 7
         Me.txtEstado.TabStop = False
-        Me.txtEstado.Text = ""
         Me.txtEstado.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         Me.txtEstado.tipo = control.txtVisanfer.TiposCaja.Alfanumerico
-        Me.txtEstado.ValorMax = 999999999
+        Me.txtEstado.ValorMax = 999999999.0R
         '
         'Label5
         '
@@ -621,9 +610,8 @@ Public Class frmSolTraspasos
         Me.txtComentario.Name = "txtComentario"
         Me.txtComentario.Size = New System.Drawing.Size(724, 99)
         Me.txtComentario.TabIndex = 5
-        Me.txtComentario.Text = ""
         Me.txtComentario.tipo = control.txtVisanfer.TiposCaja.Alfanumerico
-        Me.txtComentario.ValorMax = 999999999
+        Me.txtComentario.ValorMax = 999999999.0R
         '
         'Label14
         '
@@ -649,10 +637,9 @@ Public Class frmSolTraspasos
         Me.txtFecha.Name = "txtFecha"
         Me.txtFecha.Size = New System.Drawing.Size(72, 20)
         Me.txtFecha.TabIndex = 1
-        Me.txtFecha.Text = ""
         Me.txtFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         Me.txtFecha.tipo = control.txtVisanfer.TiposCaja.fecha
-        Me.txtFecha.ValorMax = 999999999
+        Me.txtFecha.ValorMax = 999999999.0R
         '
         'txtCodigo
         '
@@ -669,10 +656,9 @@ Public Class frmSolTraspasos
         Me.txtCodigo.Name = "txtCodigo"
         Me.txtCodigo.Size = New System.Drawing.Size(64, 20)
         Me.txtCodigo.TabIndex = 0
-        Me.txtCodigo.Text = ""
         Me.txtCodigo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtCodigo.tipo = control.txtVisanfer.TiposCaja.Numerico
-        Me.txtCodigo.ValorMax = 999999999
+        Me.txtCodigo.ValorMax = 999999999.0R
         '
         'Label3
         '
@@ -698,8 +684,8 @@ Public Class frmSolTraspasos
         '
         Me.lblTitulo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lblTitulo.Font = New System.Drawing.Font("Arial", 14.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTitulo.ForeColor = System.Drawing.Color.FromArgb(CType(128, Byte), CType(64, Byte), CType(0, Byte))
-        Me.lblTitulo.Location = New System.Drawing.Point(669, 8)
+        Me.lblTitulo.ForeColor = System.Drawing.Color.FromArgb(CType(CType(128, Byte), Integer), CType(CType(64, Byte), Integer), CType(CType(0, Byte), Integer))
+        Me.lblTitulo.Location = New System.Drawing.Point(663, 1)
         Me.lblTitulo.Name = "lblTitulo"
         Me.lblTitulo.Size = New System.Drawing.Size(343, 56)
         Me.lblTitulo.TabIndex = 45
@@ -709,7 +695,7 @@ Public Class frmSolTraspasos
         'lblInfo
         '
         Me.lblInfo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.lblInfo.Location = New System.Drawing.Point(8, 696)
+        Me.lblInfo.Location = New System.Drawing.Point(2, 689)
         Me.lblInfo.Name = "lblInfo"
         Me.lblInfo.Size = New System.Drawing.Size(1004, 16)
         Me.lblInfo.TabIndex = 43
@@ -719,7 +705,7 @@ Public Class frmSolTraspasos
         Me.lblTeclas.BackColor = System.Drawing.SystemColors.ActiveBorder
         Me.lblTeclas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lblTeclas.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTeclas.Location = New System.Drawing.Point(8, 712)
+        Me.lblTeclas.Location = New System.Drawing.Point(2, 705)
         Me.lblTeclas.Name = "lblTeclas"
         Me.lblTeclas.Size = New System.Drawing.Size(1004, 24)
         Me.lblTeclas.TabIndex = 42
@@ -728,7 +714,7 @@ Public Class frmSolTraspasos
         'frmSolTraspasos
         '
         Me.AutoScaleBaseSize = New System.Drawing.Size(5, 13)
-        Me.ClientSize = New System.Drawing.Size(1018, 743)
+        Me.ClientSize = New System.Drawing.Size(1008, 729)
         Me.ControlBox = False
         Me.Controls.Add(Me.panCampos)
         Me.Controls.Add(Me.lblTitulo)
@@ -738,12 +724,15 @@ Public Class frmSolTraspasos
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.KeyPreview = True
         Me.MaximizeBox = False
+        Me.MaximumSize = New System.Drawing.Size(1024, 768)
         Me.MinimizeBox = False
+        Me.MinimumSize = New System.Drawing.Size(1024, 768)
         Me.Name = "frmSolTraspasos"
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "SOLICITUD DE TRASPASO DE MATERIAL"
         Me.panCampos.ResumeLayout(False)
+        Me.panCampos.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -773,11 +762,19 @@ Public Class frmSolTraspasos
     Public Sub mrCargar(ByVal lnEmpresa As Integer)
 
         mnEmpresa = lnEmpresa
+
+        goProfile = New clsProfileLocal
+        goProfile.mrRecuperaDatos()
+
         mrAsignaEventos()
         mrPintaFormulario()
         mrConsulta()
 
-        Me.ShowDialog()
+        If Me.MdiParent Is Nothing Then
+            Me.ShowDialog()
+        Else
+            Me.Show()
+        End If
 
     End Sub
 
@@ -903,7 +900,7 @@ Public Class frmSolTraspasos
     Private Sub mrConfirmaSolicitud(ByVal lbAviso As Boolean)
 
         If moSolTraspaso.msEstado = "P" Then
-            If (goProfile.mnAlmacenEntradas <> moSolTraspaso.mnDesde) And lbAviso Then
+            If (goProfile.mnAlmacen <> moSolTraspaso.mnDesde) And lbAviso Then
                 MsgBox("LOS TRASPASOS SOLO SE PUEDEN CONFIRMAR DESDE EL ALMACEN DE SALIDA.", MsgBoxStyle.Exclamation, "Visanfer .Net")
             Else
                 moSolTraspaso.msEstado = "A"
@@ -1049,7 +1046,7 @@ Public Class frmSolTraspasos
         mrCargaOperario()
         txtEstado.Text = "P"
         lblConfirmado.Visible = False
-        txtHasta.Text = goProfile.mnAlmacenEntradas
+        txtHasta.Text = goProfile.mnAlmacen
         mrCargaAlmacen(mfnLong(txtHasta.Text), 2, Nothing)
         lblTeclas.BackColor = Color.GreenYellow
         lblTeclas.Text = "F5-GRABACION                                ESC-SALIDA"
@@ -1298,7 +1295,7 @@ Public Class frmSolTraspasos
         Dim loTablaLineas As DataTable
 
         ' confirmo el estado de la solicitud de traspaso
-        If (moSolTraspaso.msEstado = "P") And (moSolTraspaso.mnDesde = goProfile.mnAlmacenEntradas) Then
+        If (moSolTraspaso.msEstado = "P") And (moSolTraspaso.mnDesde = goProfile.mnAlmacen) Then
             moSolTraspaso.msEstado = "A"
             moSolTraspaso.mrGrabaDatos()
 
@@ -1448,7 +1445,7 @@ Public Class frmSolTraspasos
         ' *********** inicio del proceso de impresion *************************
         moPrinter = New clsPrinter
         moPrinter.msTipoImpresora = moImpresora.msTipo
-        moPrinter.mrInicio(goProfile.msLogin)
+        moPrinter.mrInicio(goProfile.mfsLogin)
         moPrinter.msCola = moImpresora.msCola
         moPrinter.mpbComprimida = True
         moPrinter.mpbProporcional = True

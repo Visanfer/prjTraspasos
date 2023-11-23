@@ -75,39 +75,40 @@ Public Class frmBusTraspasos
     Friend WithEvents VENDEDOR As System.Windows.Forms.ColumnHeader
     Friend WithEvents ColumnHeader1 As System.Windows.Forms.ColumnHeader
     <System.Diagnostics.DebuggerStepThrough()> Private Sub InitializeComponent()
-        Me.OBS = New System.Windows.Forms.ColumnHeader
-        Me.CODIGO = New System.Windows.Forms.ColumnHeader
-        Me.FECHA = New System.Windows.Forms.ColumnHeader
-        Me.DESDE = New System.Windows.Forms.ColumnHeader
-        Me.HASTA = New System.Windows.Forms.ColumnHeader
-        Me.lblTeclas = New System.Windows.Forms.Label
-        Me.lblPrograma = New System.Windows.Forms.Label
-        Me.panCampos = New System.Windows.Forms.Panel
-        Me.txtVendedor = New control.txtVisanfer
-        Me.Label4 = New System.Windows.Forms.Label
-        Me.Label2 = New System.Windows.Forms.Label
-        Me.txtDesA2 = New control.txtVisanfer
-        Me.txtDesA1 = New control.txtVisanfer
-        Me.txtHasta = New control.txtVisanfer
-        Me.txtDesde = New control.txtVisanfer
-        Me.Label24 = New System.Windows.Forms.Label
-        Me.txtOperador = New control.txtVisanfer
-        Me.Label7 = New System.Windows.Forms.Label
-        Me.txtComentario = New control.txtVisanfer
-        Me.Label14 = New System.Windows.Forms.Label
-        Me.txtFecha = New control.txtVisanfer
-        Me.txtCodigo = New control.txtVisanfer
-        Me.Label3 = New System.Windows.Forms.Label
-        Me.Label1 = New System.Windows.Forms.Label
-        Me.grpLineas = New System.Windows.Forms.GroupBox
-        Me.lstLineas = New System.Windows.Forms.ListView
-        Me.ColumnHeader2 = New System.Windows.Forms.ColumnHeader
-        Me.ColumnHeader3 = New System.Windows.Forms.ColumnHeader
-        Me.ColumnHeader4 = New System.Windows.Forms.ColumnHeader
-        Me.ColumnHeader1 = New System.Windows.Forms.ColumnHeader
-        Me.lstBusqueda = New System.Windows.Forms.ListView
-        Me.OPER = New System.Windows.Forms.ColumnHeader
-        Me.VENDEDOR = New System.Windows.Forms.ColumnHeader
+        Me.components = New System.ComponentModel.Container()
+        Me.OBS = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.CODIGO = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.FECHA = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.DESDE = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.HASTA = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.lblTeclas = New System.Windows.Forms.Label()
+        Me.lblPrograma = New System.Windows.Forms.Label()
+        Me.panCampos = New System.Windows.Forms.Panel()
+        Me.txtVendedor = New control.txtVisanfer()
+        Me.Label4 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.txtDesA2 = New control.txtVisanfer()
+        Me.txtDesA1 = New control.txtVisanfer()
+        Me.txtHasta = New control.txtVisanfer()
+        Me.txtDesde = New control.txtVisanfer()
+        Me.Label24 = New System.Windows.Forms.Label()
+        Me.txtOperador = New control.txtVisanfer()
+        Me.Label7 = New System.Windows.Forms.Label()
+        Me.txtComentario = New control.txtVisanfer()
+        Me.Label14 = New System.Windows.Forms.Label()
+        Me.txtFecha = New control.txtVisanfer()
+        Me.txtCodigo = New control.txtVisanfer()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.grpLineas = New System.Windows.Forms.GroupBox()
+        Me.lstLineas = New System.Windows.Forms.ListView()
+        Me.ColumnHeader2 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader3 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader4 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.ColumnHeader1 = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.lstBusqueda = New System.Windows.Forms.ListView()
+        Me.OPER = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
+        Me.VENDEDOR = CType(New System.Windows.Forms.ColumnHeader(), System.Windows.Forms.ColumnHeader)
         Me.panCampos.SuspendLayout()
         Me.grpLineas.SuspendLayout()
         Me.SuspendLayout()
@@ -143,12 +144,12 @@ Public Class frmBusTraspasos
         Me.lblTeclas.BackColor = System.Drawing.Color.Silver
         Me.lblTeclas.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lblTeclas.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblTeclas.Location = New System.Drawing.Point(7, 712)
+        Me.lblTeclas.Location = New System.Drawing.Point(1, 705)
         Me.lblTeclas.Name = "lblTeclas"
         Me.lblTeclas.Size = New System.Drawing.Size(1007, 24)
         Me.lblTeclas.TabIndex = 22
-        Me.lblTeclas.Text = "BUSCAR - F5            CTRL+L - VER LINEAS           LIMPIAR DATOS - F7          " & _
-        "   ESC - SALIDA"
+        Me.lblTeclas.Text = "BUSCAR - F5            CTRL+L - VER LINEAS           LIMPIAR DATOS - F7          " &
+    "   ESC - SALIDA"
         Me.lblTeclas.TextAlign = System.Drawing.ContentAlignment.MiddleCenter
         '
         'lblPrograma
@@ -156,7 +157,7 @@ Public Class frmBusTraspasos
         Me.lblPrograma.BackColor = System.Drawing.SystemColors.ActiveBorder
         Me.lblPrograma.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.lblPrograma.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lblPrograma.Location = New System.Drawing.Point(7, 8)
+        Me.lblPrograma.Location = New System.Drawing.Point(1, 1)
         Me.lblPrograma.Name = "lblPrograma"
         Me.lblPrograma.Size = New System.Drawing.Size(1007, 32)
         Me.lblPrograma.TabIndex = 23
@@ -184,7 +185,7 @@ Public Class frmBusTraspasos
         Me.panCampos.Controls.Add(Me.Label1)
         Me.panCampos.Controls.Add(Me.grpLineas)
         Me.panCampos.Controls.Add(Me.lstBusqueda)
-        Me.panCampos.Location = New System.Drawing.Point(7, 42)
+        Me.panCampos.Location = New System.Drawing.Point(1, 35)
         Me.panCampos.Name = "panCampos"
         Me.panCampos.Size = New System.Drawing.Size(1007, 665)
         Me.panCampos.TabIndex = 24
@@ -192,7 +193,7 @@ Public Class frmBusTraspasos
         'txtVendedor
         '
         Me.txtVendedor.AutoSelec = False
-        Me.txtVendedor.BackColor = System.Drawing.SystemColors.HighlightText
+        Me.txtVendedor.BackColor = System.Drawing.Color.White
         Me.txtVendedor.Blink = False
         Me.txtVendedor.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtVendedor.DesdeCodigo = CType(0, Long)
@@ -204,10 +205,9 @@ Public Class frmBusTraspasos
         Me.txtVendedor.Name = "txtVendedor"
         Me.txtVendedor.Size = New System.Drawing.Size(34, 20)
         Me.txtVendedor.TabIndex = 5
-        Me.txtVendedor.Text = ""
         Me.txtVendedor.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtVendedor.tipo = control.txtVisanfer.TiposCaja.Alfanumerico
-        Me.txtVendedor.ValorMax = 999999999
+        Me.txtVendedor.ValorMax = 999999999.0R
         '
         'Label4
         '
@@ -229,7 +229,7 @@ Public Class frmBusTraspasos
         'txtDesA2
         '
         Me.txtDesA2.AutoSelec = False
-        Me.txtDesA2.BackColor = System.Drawing.SystemColors.HighlightText
+        Me.txtDesA2.BackColor = System.Drawing.Color.White
         Me.txtDesA2.Blink = False
         Me.txtDesA2.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtDesA2.DesdeCodigo = CType(0, Long)
@@ -243,14 +243,13 @@ Public Class frmBusTraspasos
         Me.txtDesA2.Size = New System.Drawing.Size(329, 20)
         Me.txtDesA2.TabIndex = 121
         Me.txtDesA2.TabStop = False
-        Me.txtDesA2.Text = ""
         Me.txtDesA2.tipo = control.txtVisanfer.TiposCaja.Alfanumerico
-        Me.txtDesA2.ValorMax = 999999999
+        Me.txtDesA2.ValorMax = 999999999.0R
         '
         'txtDesA1
         '
         Me.txtDesA1.AutoSelec = False
-        Me.txtDesA1.BackColor = System.Drawing.SystemColors.HighlightText
+        Me.txtDesA1.BackColor = System.Drawing.Color.White
         Me.txtDesA1.Blink = False
         Me.txtDesA1.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtDesA1.DesdeCodigo = CType(0, Long)
@@ -264,14 +263,13 @@ Public Class frmBusTraspasos
         Me.txtDesA1.Size = New System.Drawing.Size(329, 20)
         Me.txtDesA1.TabIndex = 120
         Me.txtDesA1.TabStop = False
-        Me.txtDesA1.Text = ""
         Me.txtDesA1.tipo = control.txtVisanfer.TiposCaja.Alfanumerico
-        Me.txtDesA1.ValorMax = 999999999
+        Me.txtDesA1.ValorMax = 999999999.0R
         '
         'txtHasta
         '
         Me.txtHasta.AutoSelec = False
-        Me.txtHasta.BackColor = System.Drawing.SystemColors.HighlightText
+        Me.txtHasta.BackColor = System.Drawing.Color.White
         Me.txtHasta.Blink = False
         Me.txtHasta.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtHasta.DesdeCodigo = CType(0, Long)
@@ -283,15 +281,14 @@ Public Class frmBusTraspasos
         Me.txtHasta.Name = "txtHasta"
         Me.txtHasta.Size = New System.Drawing.Size(40, 20)
         Me.txtHasta.TabIndex = 3
-        Me.txtHasta.Text = ""
         Me.txtHasta.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtHasta.tipo = control.txtVisanfer.TiposCaja.Numerico
-        Me.txtHasta.ValorMax = 999999999
+        Me.txtHasta.ValorMax = 999999999.0R
         '
         'txtDesde
         '
         Me.txtDesde.AutoSelec = False
-        Me.txtDesde.BackColor = System.Drawing.SystemColors.HighlightText
+        Me.txtDesde.BackColor = System.Drawing.Color.White
         Me.txtDesde.Blink = False
         Me.txtDesde.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtDesde.DesdeCodigo = CType(0, Long)
@@ -303,10 +300,9 @@ Public Class frmBusTraspasos
         Me.txtDesde.Name = "txtDesde"
         Me.txtDesde.Size = New System.Drawing.Size(40, 20)
         Me.txtDesde.TabIndex = 2
-        Me.txtDesde.Text = ""
         Me.txtDesde.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtDesde.tipo = control.txtVisanfer.TiposCaja.Numerico
-        Me.txtDesde.ValorMax = 999999999
+        Me.txtDesde.ValorMax = 999999999.0R
         '
         'Label24
         '
@@ -320,7 +316,7 @@ Public Class frmBusTraspasos
         'txtOperador
         '
         Me.txtOperador.AutoSelec = False
-        Me.txtOperador.BackColor = System.Drawing.SystemColors.HighlightText
+        Me.txtOperador.BackColor = System.Drawing.Color.White
         Me.txtOperador.Blink = False
         Me.txtOperador.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtOperador.DesdeCodigo = CType(0, Long)
@@ -332,10 +328,9 @@ Public Class frmBusTraspasos
         Me.txtOperador.Name = "txtOperador"
         Me.txtOperador.Size = New System.Drawing.Size(34, 20)
         Me.txtOperador.TabIndex = 4
-        Me.txtOperador.Text = ""
         Me.txtOperador.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtOperador.tipo = control.txtVisanfer.TiposCaja.Alfanumerico
-        Me.txtOperador.ValorMax = 999999999
+        Me.txtOperador.ValorMax = 999999999.0R
         '
         'Label7
         '
@@ -348,7 +343,7 @@ Public Class frmBusTraspasos
         'txtComentario
         '
         Me.txtComentario.AutoSelec = False
-        Me.txtComentario.BackColor = System.Drawing.SystemColors.HighlightText
+        Me.txtComentario.BackColor = System.Drawing.Color.White
         Me.txtComentario.Blink = False
         Me.txtComentario.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtComentario.DesdeCodigo = CType(0, Long)
@@ -360,9 +355,8 @@ Public Class frmBusTraspasos
         Me.txtComentario.Name = "txtComentario"
         Me.txtComentario.Size = New System.Drawing.Size(837, 20)
         Me.txtComentario.TabIndex = 6
-        Me.txtComentario.Text = ""
         Me.txtComentario.tipo = control.txtVisanfer.TiposCaja.Alfanumerico
-        Me.txtComentario.ValorMax = 999999999
+        Me.txtComentario.ValorMax = 999999999.0R
         '
         'Label14
         '
@@ -376,7 +370,7 @@ Public Class frmBusTraspasos
         'txtFecha
         '
         Me.txtFecha.AutoSelec = False
-        Me.txtFecha.BackColor = System.Drawing.SystemColors.HighlightText
+        Me.txtFecha.BackColor = System.Drawing.Color.White
         Me.txtFecha.Blink = False
         Me.txtFecha.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtFecha.DesdeCodigo = CType(0, Long)
@@ -388,15 +382,14 @@ Public Class frmBusTraspasos
         Me.txtFecha.Name = "txtFecha"
         Me.txtFecha.Size = New System.Drawing.Size(72, 20)
         Me.txtFecha.TabIndex = 1
-        Me.txtFecha.Text = ""
         Me.txtFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         Me.txtFecha.tipo = control.txtVisanfer.TiposCaja.RangoFecha
-        Me.txtFecha.ValorMax = 999999999
+        Me.txtFecha.ValorMax = 999999999.0R
         '
         'txtCodigo
         '
         Me.txtCodigo.AutoSelec = False
-        Me.txtCodigo.BackColor = System.Drawing.SystemColors.HighlightText
+        Me.txtCodigo.BackColor = System.Drawing.Color.White
         Me.txtCodigo.Blink = False
         Me.txtCodigo.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.txtCodigo.DesdeCodigo = CType(0, Long)
@@ -408,10 +401,9 @@ Public Class frmBusTraspasos
         Me.txtCodigo.Name = "txtCodigo"
         Me.txtCodigo.Size = New System.Drawing.Size(64, 20)
         Me.txtCodigo.TabIndex = 0
-        Me.txtCodigo.Text = ""
         Me.txtCodigo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         Me.txtCodigo.tipo = control.txtVisanfer.TiposCaja.RangoCodigo
-        Me.txtCodigo.ValorMax = 999999999
+        Me.txtCodigo.ValorMax = 999999999.0R
         '
         'Label3
         '
@@ -453,6 +445,7 @@ Public Class frmBusTraspasos
         Me.lstLineas.Name = "lstLineas"
         Me.lstLineas.Size = New System.Drawing.Size(973, 288)
         Me.lstLineas.TabIndex = 8
+        Me.lstLineas.UseCompatibleStateImageBehavior = False
         Me.lstLineas.View = System.Windows.Forms.View.Details
         '
         'ColumnHeader2
@@ -490,6 +483,7 @@ Public Class frmBusTraspasos
         Me.lstBusqueda.Name = "lstBusqueda"
         Me.lstBusqueda.Size = New System.Drawing.Size(989, 216)
         Me.lstBusqueda.TabIndex = 7
+        Me.lstBusqueda.UseCompatibleStateImageBehavior = False
         Me.lstBusqueda.View = System.Windows.Forms.View.Details
         '
         'OPER
@@ -507,18 +501,21 @@ Public Class frmBusTraspasos
         'frmBusTraspasos
         '
         Me.AutoScaleBaseSize = New System.Drawing.Size(5, 13)
-        Me.ClientSize = New System.Drawing.Size(1018, 743)
+        Me.ClientSize = New System.Drawing.Size(1008, 729)
         Me.ControlBox = False
         Me.Controls.Add(Me.lblTeclas)
         Me.Controls.Add(Me.lblPrograma)
         Me.Controls.Add(Me.panCampos)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.KeyPreview = True
+        Me.MaximumSize = New System.Drawing.Size(1024, 768)
+        Me.MinimumSize = New System.Drawing.Size(1024, 768)
         Me.Name = "frmBusTraspasos"
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Busqueda de Traspasos"
         Me.panCampos.ResumeLayout(False)
+        Me.panCampos.PerformLayout()
         Me.grpLineas.ResumeLayout(False)
         Me.ResumeLayout(False)
 

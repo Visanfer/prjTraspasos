@@ -53,21 +53,20 @@ Public Class clsBusTraspasos
 
         mcolLineas = New Collection
         mcolTraspasos = New Collection
-        lsSql = "select * from traline where emp_lin = " & mnEmpresa & _
-                " and est_lin = 'N' and cod_lin in (" & _
-                "select cod_tra from tracabe where emp_tra = " & mnEmpresa & _
-                " and cod_tra in (select cod_lin from traline" & _
-                " where emp_lin = " & mnEmpresa & _
-                " and est_lin = 'N') and has_tra = " & mnHasta & ")"
-        lsSql = "select b.* from tracabe a, traline b where" & _
-                " a.emp_tra = b.emp_lin and a.cod_tra = b.cod_lin" & _
-                " and b.emp_lin = " & mnEmpresa & _
-                " and b.est_lin = 'N'" & _
-                " and a.has_tra = " & mnHasta
+        lsSql = "select * from tracabe left join traline" &
+            " on tracabe.emp_tra=traline.emp_lin And tracabe.cod_tra=traline.cod_lin" &
+            " where emp_tra = " & mnEmpresa &
+            " and has_tra = " & mnHasta &
+            " and est_lin='N'"
+        'lsSql = "select b.* from tracabe a, traline b where" & _
+        '        " a.emp_tra = b.emp_lin and a.cod_tra = b.cod_lin" & _
+        '        " and b.emp_lin = " & mnEmpresa & _
+        '        " and b.est_lin = 'N'" & _
+        '        " and a.has_tra = " & mnHasta
         If lnOrden = 1 Then
-            lsSql = lsSql & " order by b.cod_lin,b.lin_lin asc"
+            lsSql = lsSql & " order by cod_lin,lin_lin asc"
         Else
-            lsSql = lsSql & " order by b.des_lin,b.cod_lin asc"
+            lsSql = lsSql & " order by des_lin,cod_lin asc"
         End If
         Dim loComando As New mySqlCommand(lsSql, lconConexion)
         loFuente = loComando.ExecuteReader
@@ -83,34 +82,17 @@ Public Class clsBusTraspasos
             loLinea.msEstado = Trim(loFuente("est_lin") & "")
             loLinea.mbEsNuevo = False
             mcolLineas.Add(loLinea, loLinea.mpsCodigo)
+
+            loTraspaso = New clsTraspaso
+            loTraspaso.mrCargaDatos(loFuente)
+            loTraspaso.mbEsNuevo = False
+            On Error Resume Next
+            mcolTraspasos.Add(loTraspaso, loTraspaso.mpsCodigo)
+            On Error GoTo 0
+
         End While
         loFuente.Close()
         lconConexion.Close()
-
-        For Each loLinea In mcolLineas
-            ' ahora gestiono el traspaso y veo si es suyo **********
-            loTraspaso = New clsTraspaso
-            loTraspaso.mnEmpresa = loLinea.mnEmpresa
-            loTraspaso.mnCodigo = loLinea.mnCodigo
-            On Error Resume Next
-            loTraspaso = mcolTraspasos(loTraspaso.mpsCodigo)
-            On Error GoTo 0
-            If loTraspaso.mbEsNuevo Then
-                loTraspaso.mrRecuperaDatos()
-                loTraspaso.mcolLineas = New Collection
-                mcolTraspasos.Add(loTraspaso, loTraspaso.mpsCodigo)
-            End If
-            'If loTraspaso.mnHasta = mnHasta Then
-            '    loTraspaso.mcolLineas.Add(loLinea, loLinea.mpsCodigo)
-            'End If
-        Next
-
-        ' ahora borro los traspasos que no quiero ***************
-        'For Each loTraspaso In mcolTraspasos
-        '    If loTraspaso.mnHasta <> mnHasta Then
-        '        mcolTraspasos.Remove(loTraspaso.mpsCodigo)
-        '    End If
-        'Next
 
     End Sub
 
