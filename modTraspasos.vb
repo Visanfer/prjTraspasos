@@ -14,10 +14,10 @@ Public Module modTraspasos
         goUsuario.mnCodigo = 206
         goUsuario.mrRecuperaDatos()
 
-        Dim loPrincipal As New frmTraspasos
-        loPrincipal.mrCargar(1, Nothing)
+        'Dim loPrincipal As New frmTraspasos
+        'loPrincipal.mrCargar(1, Nothing)
 
-        'mrEjecutaMenu("4", Nothing, 1)
+        mrEjecutaMenu("2", Nothing, 1)
 
     End Sub
 
