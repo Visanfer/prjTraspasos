@@ -319,31 +319,31 @@ Public Class clsTraspaso
                     mnCodigo & "','" &
                     mnDesde & "','" &
                     mnHasta & "','" &
-                    Format(mdFecha, "yyyy/MM/dd") & "','" &
+                    Format(mdFecha, formatoFecha) & "','" &
                     msObservaciones & "','" &
                     msEstado & "','" &
                     mnVendedor & "','" &
                     mnOperario & "','" &
                     msEstadoEnvio & "','" &
-                    Format(mdFechaGrabacion, "yyyy/MM/dd HH:mm:ss") & "','" &
+                    Format(mdFechaGrabacion, formatoFechahora) & "','" &
                     mnOperarioEnvio & "','" &
-                    Format(mdFechaEnvio, "yyyy/MM/dd HH:mm:ss") & "','" &
+                    Format(mdFechaEnvio, formatoFechahora) & "','" &
                     mnOperarioRecepcion & "','" &
-                    Format(mdFechaRecepcion, "yyyy/MM/dd HH:mm:ss") & "')"
+                    Format(mdFechaRecepcion, formatoFechahora) & "')"
         Else
             lsSql = "update tracabe set des_tra = '" & mnDesde &
                 "', has_tra = '" & mnHasta &
-                "', fec_tra = '" & Format(mdFecha, "yyyy/MM/dd") &
+                "', fec_tra = '" & Format(mdFecha, formatoFecha) &
                 "', obs_tra = '" & msObservaciones &
                 "', est_tra = '" & msEstado &
                 "', ven_tra = '" & mnVendedor &
                 "', ope_tra = '" & mnOperario &
                 "', estenvio = '" & msEstadoEnvio &
-                "', fecgraba = '" & Format(mdFechaGrabacion, "yyyy/MM/dd HH:mm:ss") &
+                "', fecgraba = '" & Format(mdFechaGrabacion, formatoFechahora) &
                 "', operenvio = '" & mnOperarioEnvio &
-                "', fecenvio = '" & Format(mdFechaEnvio, "yyyy/MM/dd HH:mm:ss") &
+                "', fecenvio = '" & Format(mdFechaEnvio, formatoFechahora) &
                 "', operrecibe = '" & mnOperarioRecepcion &
-                "', fecrecibe = '" & Format(mdFechaRecepcion, "yyyy/MM/dd HH:mm:ss") &
+                "', fecrecibe = '" & Format(mdFechaRecepcion, formatoFechahora) &
                 "' where emp_tra = " & mnEmpresa &
                 " and cod_tra = " & mnCodigo
         End If
