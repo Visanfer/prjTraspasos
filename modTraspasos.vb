@@ -17,7 +17,7 @@ Public Module modTraspasos
         'Dim loPrincipal As New frmTraspasos
         'loPrincipal.mrCargar(1, Nothing)
 
-        mrEjecutaMenu("2", Nothing, 1)
+        mrEjecutaMenu("1", Nothing, 1)
 
     End Sub
 

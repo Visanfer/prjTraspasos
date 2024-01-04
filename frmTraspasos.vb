@@ -1901,6 +1901,7 @@ Public Class frmTraspasos
         ' graba toda la carga en la base de datos *****************
 
         mbGrabando = True
+
         If mtEstado = EstadoVentana.NuevoRegistro Or
            mtEstado = EstadoVentana.Mantenimiento Then
             ' compruebo que los campos obligatorios estan cumplimentados
@@ -1924,6 +1925,7 @@ Public Class frmTraspasos
                     End If
                     If Not lbError Then ' si la grabacion es correcta
                         If mtEstado = EstadoVentana.NuevoRegistro Then
+
                             ' si es un registro nuevo recupero su codigo
                             ' le pongo los valores de la hora a la que se graba
                             moTraspaso.msEstadoEnvio = "G"
@@ -1941,14 +1943,18 @@ Public Class frmTraspasos
                             txtCodigo.Text = moTraspaso.mnCodigo
                             moTraspaso.mrGrabaDatos() ' grabo el contenido
                             moTraspaso.mrRecuperaLineas()
+
                             ' **** ahora actualizo las existencias del traspaso **********
                             moTraspaso.mrActualizaTraspaso()
-                            ' le pongo la captura de eventos porque algunas veces lo hace mal hasta aqui ******
-                            System.Windows.Forms.Application.DoEvents()
-                            ' ahora lo que hago es lanzar la impresion del pedido ********
-                            Dim lsResult As MsgBoxResult = MsgBox("¿DESEA IMPRIMIR EL TRASPASO?",
-                                        MsgBoxStyle.Information + MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2, "Visanfer .Net")
-                            If lsResult = vbYes Then mrImprimirRemoto()
+
+                            '' le pongo la captura de eventos porque algunas veces lo hace mal hasta aqui ******
+                            'System.Windows.Forms.Application.DoEvents()
+
+                            '' ahora lo que hago es lanzar la impresion del pedido ********
+                            'Dim lsResult As MsgBoxResult = MsgBox("¿DESEA IMPRIMIR EL TRASPASO?",
+                            '            MsgBoxStyle.Information + MsgBoxStyle.YesNo + MsgBoxStyle.DefaultButton2, "Visanfer .Net")
+                            'If lsResult = vbYes Then mrImprimirRemoto()
+
                         End If
                         ' despues de grabar resituo el foco en le inicio
                         mrMoverCampos(1)

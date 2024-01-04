@@ -77,6 +77,7 @@ Public Class clsTraspaso
 
             ' **** ahora actualizo el estado del traspaso ********
             msEstado = "A"
+            mbEsNuevo = False
             mrGrabaDatos()
             ' ****************************************************
         Next
@@ -309,48 +310,110 @@ Public Class clsTraspaso
     End Sub
 
     Public Sub mrGrabaDatos()
-        Dim lconConexion As mySqlConnection = mfconConexionSQL(False)
+
+        Dim loControl As New clsControlBD
+        Dim lsSql As String = ""
+
+        If mbEsNuevo Then
+            lsSql = "insert into tracabe values ('" & mnEmpresa & "','" &
+                    mnCodigo & "','" &
+                    mnDesde & "','" &
+                    mnHasta & "','" &
+                    Format(mdFecha, "yyyy/MM/dd") & "','" &
+                    msObservaciones & "','" &
+                    msEstado & "','" &
+                    mnVendedor & "','" &
+                    mnOperario & "','" &
+                    msEstadoEnvio & "','" &
+                    Format(mdFechaGrabacion, "yyyy/MM/dd HH:mm:ss") & "','" &
+                    mnOperarioEnvio & "','" &
+                    Format(mdFechaEnvio, "yyyy/MM/dd HH:mm:ss") & "','" &
+                    mnOperarioRecepcion & "','" &
+                    Format(mdFechaRecepcion, "yyyy/MM/dd HH:mm:ss") & "')"
+        Else
+            lsSql = "update tracabe set des_tra = '" & mnDesde &
+                "', has_tra = '" & mnHasta &
+                "', fec_tra = '" & Format(mdFecha, "yyyy/MM/dd") &
+                "', obs_tra = '" & msObservaciones &
+                "', est_tra = '" & msEstado &
+                "', ven_tra = '" & mnVendedor &
+                "', ope_tra = '" & mnOperario &
+                "', estenvio = '" & msEstadoEnvio &
+                "', fecgraba = '" & Format(mdFechaGrabacion, "yyyy/MM/dd HH:mm:ss") &
+                "', operenvio = '" & mnOperarioEnvio &
+                "', fecenvio = '" & Format(mdFechaEnvio, "yyyy/MM/dd HH:mm:ss") &
+                "', operrecibe = '" & mnOperarioRecepcion &
+                "', fecrecibe = '" & Format(mdFechaRecepcion, "yyyy/MM/dd HH:mm:ss") &
+                "' where emp_tra = " & mnEmpresa &
+                " and cod_tra = " & mnCodigo
+        End If
+
+        loControl.mrEjecutaComando(lsSql, False)
+
+        ' ***************************************************************************************
+        ' control para borrar el duplicado que se produce y no se como **************************
+        ' ***************************************************************************************
+
+        If mbEsNuevo Then
+            lsSql = "select * from tracabe where emp_tra = " & mnEmpresa & " and cod_tra = " & mnCodigo
+            Dim loRegistros As DataTable = loControl.mfoRecuperaDatos(False, lsSql, "tracabe")
+            If loRegistros.Rows.Count = 2 Then
+                lsSql = "delete from tracabe where emp_tra = " & mnEmpresa & " and cod_tra = " & mnCodigo & " limit 1"
+                loControl.mrEjecutaComando(lsSql, False)
+            End If
+        End If
+
+        ' ***************************************************************************************
+        ' ***************************************************************************************
+        ' ***************************************************************************************
+
+        mbEsNuevo = False
+
+    End Sub
+
+    Public Sub mrGrabaDatosViejo()
+        Dim lconConexion As MySqlConnection = mfconConexionSQL(False)
         If lconConexion.State = ConnectionState.Closed Then Exit Sub
 
         Dim lsSql As String
-        Dim loComando As New mySqlCommand
+        Dim loComando As New MySqlCommand
 
         If mbEsNuevo Then
-            lsSql = "insert into tracabe values ('" & mnEmpresa & "','" & _
-                    mnCodigo & "','" & _
-                    mnDesde & "','" & _
-                    mnHasta & "','" & _
-                    Format(mdFecha, "yyyy/MM/dd") & "','" & _
-                    msObservaciones & "','" & _
-                    msEstado & "','" & _
-                    mnVendedor & "','" & _
-                    mnOperario & "','" & _
-                    msEstadoEnvio & "','" & _
-                    Format(mdFechaGrabacion, "yyyy/MM/dd HH:mm:ss") & "','" & _
-                    mnOperarioEnvio & "','" & _
-                    Format(mdFechaEnvio, "yyyy/MM/dd HH:mm:ss") & "','" & _
-                    mnOperarioRecepcion & "','" & _
+            lsSql = "insert into tracabe values ('" & mnEmpresa & "','" &
+                    mnCodigo & "','" &
+                    mnDesde & "','" &
+                    mnHasta & "','" &
+                    Format(mdFecha, "yyyy/MM/dd") & "','" &
+                    msObservaciones & "','" &
+                    msEstado & "','" &
+                    mnVendedor & "','" &
+                    mnOperario & "','" &
+                    msEstadoEnvio & "','" &
+                    Format(mdFechaGrabacion, "yyyy/MM/dd HH:mm:ss") & "','" &
+                    mnOperarioEnvio & "','" &
+                    Format(mdFechaEnvio, "yyyy/MM/dd HH:mm:ss") & "','" &
+                    mnOperarioRecepcion & "','" &
                     Format(mdFechaRecepcion, "yyyy/MM/dd HH:mm:ss") & "')"
-            loComando = New mySqlCommand(lsSql, lconConexion)
+            loComando = New MySqlCommand(lsSql, lconConexion)
             loComando.ExecuteNonQuery()
             lconConexion.Close()
         Else
-            lsSql = "update tracabe set des_tra = '" & mnDesde & _
-                "', has_tra = '" & mnHasta & _
-                "', fec_tra = '" & Format(mdFecha, "yyyy/MM/dd") & _
-                "', obs_tra = '" & msObservaciones & _
-                "', est_tra = '" & msEstado & _
-                "', ven_tra = '" & mnVendedor & _
-                "', ope_tra = '" & mnOperario & _
-                "', estenvio = '" & msEstadoEnvio & _
-                "', fecgraba = '" & Format(mdFechaGrabacion, "yyyy/MM/dd HH:mm:ss") & _
-                "', operenvio = '" & mnOperarioEnvio & _
-                "', fecenvio = '" & Format(mdFechaEnvio, "yyyy/MM/dd HH:mm:ss") & _
-                "', operrecibe = '" & mnOperarioRecepcion & _
-                "', fecrecibe = '" & Format(mdFechaRecepcion, "yyyy/MM/dd HH:mm:ss") & _
-                "' where emp_tra = " & mnEmpresa & _
+            lsSql = "update tracabe set des_tra = '" & mnDesde &
+                "', has_tra = '" & mnHasta &
+                "', fec_tra = '" & Format(mdFecha, "yyyy/MM/dd") &
+                "', obs_tra = '" & msObservaciones &
+                "', est_tra = '" & msEstado &
+                "', ven_tra = '" & mnVendedor &
+                "', ope_tra = '" & mnOperario &
+                "', estenvio = '" & msEstadoEnvio &
+                "', fecgraba = '" & Format(mdFechaGrabacion, "yyyy/MM/dd HH:mm:ss") &
+                "', operenvio = '" & mnOperarioEnvio &
+                "', fecenvio = '" & Format(mdFechaEnvio, "yyyy/MM/dd HH:mm:ss") &
+                "', operrecibe = '" & mnOperarioRecepcion &
+                "', fecrecibe = '" & Format(mdFechaRecepcion, "yyyy/MM/dd HH:mm:ss") &
+                "' where emp_tra = " & mnEmpresa &
                 " and cod_tra = " & mnCodigo
-            loComando = New mySqlCommand(lsSql, lconConexion)
+            loComando = New MySqlCommand(lsSql, lconConexion)
             loComando.ExecuteNonQuery()
             lconConexion.Close()
         End If
