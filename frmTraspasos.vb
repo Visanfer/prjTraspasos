@@ -985,6 +985,7 @@ Public Class frmTraspasos
         Me.txtFecha.MaxLength = 10
         Me.txtFecha.moBlink = Nothing
         Me.txtFecha.Name = "txtFecha"
+        Me.txtFecha.ReadOnly = True
         Me.txtFecha.Size = New System.Drawing.Size(72, 20)
         Me.txtFecha.TabIndex = 1
         Me.txtFecha.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
@@ -2616,7 +2617,7 @@ Public Class frmTraspasos
         Else
             ' primero los campos de la cabecera **************
             moTraspaso.mnCodigo = txtCodigo.Text
-            moTraspaso.mdFecha = txtFecha.Text
+            moTraspaso.mdFecha = Now
             moTraspaso.msEstado = txtEstado.Text
             moTraspaso.msObservaciones = txtComentario.Text
             moTraspaso.mnDesde = txtDesde.Text

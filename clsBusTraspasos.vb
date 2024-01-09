@@ -116,12 +116,12 @@ Public Class clsBusTraspasos
 
         If Format(mdHastaFecha, "dd/MM/yyyy") <> "01/01/1900" Then
             If Format(mdDesdeFecha, "dd/MM/yyyy") <> "01/01/1900" Then
-                lsWhere = lsWhere & " fec_tra >= '" & Format(mdDesdeFecha, "yyyy/MM/dd") & "' and"
-                lsWhere = lsWhere & " fec_tra <= '" & Format(mdHastaFecha, "yyyy/MM/dd") & "' and"
+                lsWhere = lsWhere & " date(fec_tra) >= '" & Format(mdDesdeFecha, "yyyy/MM/dd") & "' and"
+                lsWhere = lsWhere & " date(fec_tra) <= '" & Format(mdHastaFecha, "yyyy/MM/dd") & "' and"
             End If
         Else
             If Format(mdFecha, "dd/MM/yyyy") <> "01/01/1900" Then
-                lsWhere = lsWhere & " fec_tra = '" & Format(mdFecha, "yyyy/MM/dd") & "' and"
+                lsWhere = lsWhere & " date(fec_tra) = '" & Format(mdFecha, "yyyy/MM/dd") & "' and"
             End If
         End If
 

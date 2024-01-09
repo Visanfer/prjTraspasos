@@ -7,7 +7,7 @@ Public Class clsTraspaso
     Public mnCodigo As Long
     Public mnDesde As Integer
     Public mnHasta As Integer
-    Public mdFecha As Date
+    Public mdFecha As Date = Now
     Public msObservaciones As String
     Public msEstado As String
     Public mnVendedor As Integer
@@ -354,14 +354,14 @@ Public Class clsTraspaso
         ' control para borrar el duplicado que se produce y no se como **************************
         ' ***************************************************************************************
 
-        If mbEsNuevo Then
-            lsSql = "select * from tracabe where emp_tra = " & mnEmpresa & " and cod_tra = " & mnCodigo
-            Dim loRegistros As DataTable = loControl.mfoRecuperaDatos(False, lsSql, "tracabe")
-            If loRegistros.Rows.Count = 2 Then
-                lsSql = "delete from tracabe where emp_tra = " & mnEmpresa & " and cod_tra = " & mnCodigo & " limit 1"
-                loControl.mrEjecutaComando(lsSql, False)
-            End If
-        End If
+        'If mbEsNuevo Then
+        '    lsSql = "select * from tracabe where emp_tra = " & mnEmpresa & " and cod_tra = " & mnCodigo
+        '    Dim loRegistros As DataTable = loControl.mfoRecuperaDatos(False, lsSql, "tracabe")
+        '    If loRegistros.Rows.Count = 2 Then
+        '        lsSql = "delete from tracabe where emp_tra = " & mnEmpresa & " and cod_tra = " & mnCodigo & " limit 1"
+        '        loControl.mrEjecutaComando(lsSql, False)
+        '    End If
+        'End If
 
         ' ***************************************************************************************
         ' ***************************************************************************************
@@ -371,55 +371,55 @@ Public Class clsTraspaso
 
     End Sub
 
-    Public Sub mrGrabaDatosViejo()
-        Dim lconConexion As MySqlConnection = mfconConexionSQL(False)
-        If lconConexion.State = ConnectionState.Closed Then Exit Sub
+    'Public Sub mrGrabaDatosViejo()
+    '    Dim lconConexion As MySqlConnection = mfconConexionSQL(False)
+    '    If lconConexion.State = ConnectionState.Closed Then Exit Sub
 
-        Dim lsSql As String
-        Dim loComando As New MySqlCommand
+    '    Dim lsSql As String
+    '    Dim loComando As New MySqlCommand
 
-        If mbEsNuevo Then
-            lsSql = "insert into tracabe values ('" & mnEmpresa & "','" &
-                    mnCodigo & "','" &
-                    mnDesde & "','" &
-                    mnHasta & "','" &
-                    Format(mdFecha, "yyyy/MM/dd") & "','" &
-                    msObservaciones & "','" &
-                    msEstado & "','" &
-                    mnVendedor & "','" &
-                    mnOperario & "','" &
-                    msEstadoEnvio & "','" &
-                    Format(mdFechaGrabacion, "yyyy/MM/dd HH:mm:ss") & "','" &
-                    mnOperarioEnvio & "','" &
-                    Format(mdFechaEnvio, "yyyy/MM/dd HH:mm:ss") & "','" &
-                    mnOperarioRecepcion & "','" &
-                    Format(mdFechaRecepcion, "yyyy/MM/dd HH:mm:ss") & "')"
-            loComando = New MySqlCommand(lsSql, lconConexion)
-            loComando.ExecuteNonQuery()
-            lconConexion.Close()
-        Else
-            lsSql = "update tracabe set des_tra = '" & mnDesde &
-                "', has_tra = '" & mnHasta &
-                "', fec_tra = '" & Format(mdFecha, "yyyy/MM/dd") &
-                "', obs_tra = '" & msObservaciones &
-                "', est_tra = '" & msEstado &
-                "', ven_tra = '" & mnVendedor &
-                "', ope_tra = '" & mnOperario &
-                "', estenvio = '" & msEstadoEnvio &
-                "', fecgraba = '" & Format(mdFechaGrabacion, "yyyy/MM/dd HH:mm:ss") &
-                "', operenvio = '" & mnOperarioEnvio &
-                "', fecenvio = '" & Format(mdFechaEnvio, "yyyy/MM/dd HH:mm:ss") &
-                "', operrecibe = '" & mnOperarioRecepcion &
-                "', fecrecibe = '" & Format(mdFechaRecepcion, "yyyy/MM/dd HH:mm:ss") &
-                "' where emp_tra = " & mnEmpresa &
-                " and cod_tra = " & mnCodigo
-            loComando = New MySqlCommand(lsSql, lconConexion)
-            loComando.ExecuteNonQuery()
-            lconConexion.Close()
-        End If
-        mbEsNuevo = False
+    '    If mbEsNuevo Then
+    '        lsSql = "insert into tracabe values ('" & mnEmpresa & "','" &
+    '                mnCodigo & "','" &
+    '                mnDesde & "','" &
+    '                mnHasta & "','" &
+    '                Format(mdFecha, "yyyy/MM/dd") & "','" &
+    '                msObservaciones & "','" &
+    '                msEstado & "','" &
+    '                mnVendedor & "','" &
+    '                mnOperario & "','" &
+    '                msEstadoEnvio & "','" &
+    '                Format(mdFechaGrabacion, "yyyy/MM/dd HH:mm:ss") & "','" &
+    '                mnOperarioEnvio & "','" &
+    '                Format(mdFechaEnvio, "yyyy/MM/dd HH:mm:ss") & "','" &
+    '                mnOperarioRecepcion & "','" &
+    '                Format(mdFechaRecepcion, "yyyy/MM/dd HH:mm:ss") & "')"
+    '        loComando = New MySqlCommand(lsSql, lconConexion)
+    '        loComando.ExecuteNonQuery()
+    '        lconConexion.Close()
+    '    Else
+    '        lsSql = "update tracabe set des_tra = '" & mnDesde &
+    '            "', has_tra = '" & mnHasta &
+    '            "', fec_tra = '" & Format(mdFecha, "yyyy/MM/dd") &
+    '            "', obs_tra = '" & msObservaciones &
+    '            "', est_tra = '" & msEstado &
+    '            "', ven_tra = '" & mnVendedor &
+    '            "', ope_tra = '" & mnOperario &
+    '            "', estenvio = '" & msEstadoEnvio &
+    '            "', fecgraba = '" & Format(mdFechaGrabacion, "yyyy/MM/dd HH:mm:ss") &
+    '            "', operenvio = '" & mnOperarioEnvio &
+    '            "', fecenvio = '" & Format(mdFechaEnvio, "yyyy/MM/dd HH:mm:ss") &
+    '            "', operrecibe = '" & mnOperarioRecepcion &
+    '            "', fecrecibe = '" & Format(mdFechaRecepcion, "yyyy/MM/dd HH:mm:ss") &
+    '            "' where emp_tra = " & mnEmpresa &
+    '            " and cod_tra = " & mnCodigo
+    '        loComando = New MySqlCommand(lsSql, lconConexion)
+    '        loComando.ExecuteNonQuery()
+    '        lconConexion.Close()
+    '    End If
+    '    mbEsNuevo = False
 
-    End Sub
+    'End Sub
 
     Public Sub mrBorrarDatos()
         Dim lconConexion As mySqlConnection = mfconConexionSQL(False)
