@@ -2844,6 +2844,10 @@ Public Class frmTraspasos
 
     Private Sub mrMuestraConfirmacion()
 
+        If moTraspaso Is Nothing Then Exit Sub
+        If moTraspaso.mcolLineas Is Nothing Then Exit Sub
+        If moTraspaso.mcolLineas.Count = 0 Then Exit Sub
+
         Dim lnLinea As Integer = grdLineas.mnRow + 1
         If lnLinea <= moTraspaso.mcolLineas.Count Then
             Dim loLinea As New clsTraspasoLin
