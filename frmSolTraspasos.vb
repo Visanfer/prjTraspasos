@@ -1,10 +1,11 @@
-Option Explicit On 
+Option Explicit On
 Imports System.Windows.Forms.SendKeys
 Imports prjControl
 Imports prjPrinterNet
 Imports prjEmpresas
 Imports prjArticulos
 Imports prjAlmacen
+Imports Microsoft.Reporting.WinForms
 
 Public Class frmSolTraspasos
     Inherits System.Windows.Forms.Form
@@ -1348,6 +1349,11 @@ Public Class frmSolTraspasos
             loRow = loTablaLineas.NewRow()
             loRow("Codigo") = loLinea.mnCodigo
             loRow("Linea") = lnI
+            If loLinea.mnDetalle > 0 Then
+                loRow("CodArticulo") = loLinea.mnArticulo & "." & loLinea.mnDetalle
+            Else
+                loRow("CodArticulo") = loLinea.mnArticulo
+            End If
             loRow("Articulo") = loLinea.mnArticulo
             loRow("Detalle") = loLinea.mnDetalle
             loRow("Cantidad") = loLinea.mnCantidad
@@ -1360,8 +1366,8 @@ Public Class frmSolTraspasos
             lnI = lnI + 1
         Next
 
-        Dim loListado As New rptSolTraspaso
-        loListado.SetDataSource(moDataTraspaso)
+        'Dim loListado As New rptSolTraspaso
+        'loListado.SetDataSource(moDataTraspaso)
 
         ' impresion especial para la fabrica ********
         If moImpresora.mnCodigo = 80 Then
@@ -1370,10 +1376,23 @@ Public Class frmSolTraspasos
         Else
             moImpresora.msPapel = "A4"
         End If
-        If moSelImpresora.msDestino = "I" Then
-            prjPrinterNet.mrImprimeReport(goUsuario, CType(loListado, CrystalDecisions.CrystalReports.Engine.ReportDocument), moImpresora, moSelImpresora.mnCopias)
+        'If moSelImpresora.msDestino = "I" Then
+        '    prjPrinterNet.mrImprimeReport(goUsuario, CType(loListado, CrystalDecisions.CrystalReports.Engine.ReportDocument), moImpresora, moSelImpresora.mnCopias)
+        'Else
+        '    prjPrinterNet.mrVisualizaReport(goUsuario, CType(loListado, CrystalDecisions.CrystalReports.Engine.ReportDocument), moImpresora, moSelImpresora.mnCopias)
+        'End If
+
+
+        Dim loVisor As New prjPrinterNet.frmVisorReport
+        loVisor.moReport.LocalReport.ReportEmbeddedResource = "prjTraspasos.rdlcSolTraspaso.rdlc"
+        loVisor.moReport.LocalReport.DataSources.Clear()
+        loVisor.moReport.LocalReport.DataSources.Add(New ReportDataSource("Cabecera", loTablaCabecera))
+        loVisor.moReport.LocalReport.DataSources.Add(New ReportDataSource("Lineas", loTablaLineas))
+        loVisor.moReport.LocalReport.EnableExternalImages = True
+        If lsSalida.Equals("I") Then
+            loVisor.mrImprimir(lsPapel, False, moImpresora.msCola)
         Else
-            prjPrinterNet.mrVisualizaReport(goUsuario, CType(loListado, CrystalDecisions.CrystalReports.Engine.ReportDocument), moImpresora, moSelImpresora.mnCopias)
+            loVisor.mrVisualizar(lsPapel, False, moImpresora.msCola)
         End If
 
         panCampos.Enabled = True

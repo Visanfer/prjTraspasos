@@ -1,12 +1,10 @@
-Option Explicit On 
+Option Explicit On
 Imports prjControl
-Imports CrystalDecisions.CrystalReports.Engine
 
 Public Module modTraspasos
     Public gnLlave As Integer          ' llave actual de seguridad
     Public goUsuario As New clsUsuario
-    Public goProfile As New clsprofilelocal()
-    Public goListado As CrystalDecisions.CrystalReports.Engine.ReportDocument
+    Public goProfile As New clsProfileLocal()
 
     Public Sub Main()
 

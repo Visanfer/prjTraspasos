@@ -12,7 +12,7 @@
   <xs:element name="dtsTraspaso" msdata:IsDataSet="true" msdata:Locale="en-US" msprop:Generator_DataSetName="dtsTraspaso" msprop:Generator_UserDSName="dtsTraspaso">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="Cabecera" msprop:Generator_TableClassName="CabeceraDataTable" msprop:Generator_TableVarName="tableCabecera" msprop:Generator_RowChangedName="CabeceraRowChanged" msprop:Generator_TablePropName="Cabecera" msprop:Generator_RowDeletingName="CabeceraRowDeleting" msprop:Generator_RowChangingName="CabeceraRowChanging" msprop:Generator_RowEvHandlerName="CabeceraRowChangeEventHandler" msprop:Generator_RowDeletedName="CabeceraRowDeleted" msprop:Generator_RowClassName="CabeceraRow" msprop:Generator_UserTableName="Cabecera" msprop:Generator_RowEvArgName="CabeceraRowChangeEvent">
+        <xs:element name="Cabecera" msprop:Generator_TableClassName="CabeceraDataTable" msprop:Generator_TableVarName="tableCabecera" msprop:Generator_TablePropName="Cabecera" msprop:Generator_RowDeletingName="CabeceraRowDeleting" msprop:Generator_RowChangingName="CabeceraRowChanging" msprop:Generator_RowEvHandlerName="CabeceraRowChangeEventHandler" msprop:Generator_RowDeletedName="CabeceraRowDeleted" msprop:Generator_UserTableName="Cabecera" msprop:Generator_RowChangedName="CabeceraRowChanged" msprop:Generator_RowEvArgName="CabeceraRowChangeEvent" msprop:Generator_RowClassName="CabeceraRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Codigo" msprop:Generator_ColumnVarNameInTable="columnCodigo" msprop:Generator_ColumnPropNameInRow="Codigo" msprop:Generator_ColumnPropNameInTable="CodigoColumn" msprop:Generator_UserColumnName="Codigo" type="xs:integer" />
@@ -27,7 +27,7 @@
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="Lineas" msprop:Generator_TableClassName="LineasDataTable" msprop:Generator_TableVarName="tableLineas" msprop:Generator_RowChangedName="LineasRowChanged" msprop:Generator_TablePropName="Lineas" msprop:Generator_RowDeletingName="LineasRowDeleting" msprop:Generator_RowChangingName="LineasRowChanging" msprop:Generator_RowEvHandlerName="LineasRowChangeEventHandler" msprop:Generator_RowDeletedName="LineasRowDeleted" msprop:Generator_RowClassName="LineasRow" msprop:Generator_UserTableName="Lineas" msprop:Generator_RowEvArgName="LineasRowChangeEvent">
+        <xs:element name="Lineas" msprop:Generator_TableClassName="LineasDataTable" msprop:Generator_TableVarName="tableLineas" msprop:Generator_TablePropName="Lineas" msprop:Generator_RowDeletingName="LineasRowDeleting" msprop:Generator_RowChangingName="LineasRowChanging" msprop:Generator_RowEvHandlerName="LineasRowChangeEventHandler" msprop:Generator_RowDeletedName="LineasRowDeleted" msprop:Generator_UserTableName="Lineas" msprop:Generator_RowChangedName="LineasRowChanged" msprop:Generator_RowEvArgName="LineasRowChangeEvent" msprop:Generator_RowClassName="LineasRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Codigo" msprop:Generator_ColumnVarNameInTable="columnCodigo" msprop:Generator_ColumnPropNameInRow="Codigo" msprop:Generator_ColumnPropNameInTable="CodigoColumn" msprop:Generator_UserColumnName="Codigo" type="xs:integer" />
@@ -39,10 +39,11 @@
               <xs:element name="Referencia" msprop:Generator_ColumnVarNameInTable="columnReferencia" msprop:Generator_ColumnPropNameInRow="Referencia" msprop:Generator_ColumnPropNameInTable="ReferenciaColumn" msprop:Generator_UserColumnName="Referencia" type="xs:string" minOccurs="0" />
               <xs:element name="Existencias" msprop:Generator_ColumnVarNameInTable="columnExistencias" msprop:Generator_ColumnPropNameInRow="Existencias" msprop:Generator_ColumnPropNameInTable="ExistenciasColumn" msprop:Generator_UserColumnName="Existencias" type="xs:double" minOccurs="0" />
               <xs:element name="codigobarras" msprop:Generator_ColumnVarNameInTable="columncodigobarras" msprop:Generator_ColumnPropNameInRow="codigobarras" msprop:Generator_ColumnPropNameInTable="codigobarrasColumn" msprop:Generator_UserColumnName="codigobarras" type="xs:string" minOccurs="0" />
+              <xs:element name="codarticulo" msprop:Generator_ColumnVarNameInTable="columncodarticulo" msprop:Generator_ColumnPropNameInRow="codarticulo" msprop:Generator_ColumnPropNameInTable="codarticuloColumn" msprop:Generator_UserColumnName="codarticulo" type="xs:string" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>
-        <xs:element name="Pie" msprop:Generator_TableClassName="PieDataTable" msprop:Generator_TableVarName="tablePie" msprop:Generator_RowChangedName="PieRowChanged" msprop:Generator_TablePropName="Pie" msprop:Generator_RowDeletingName="PieRowDeleting" msprop:Generator_RowChangingName="PieRowChanging" msprop:Generator_RowEvHandlerName="PieRowChangeEventHandler" msprop:Generator_RowDeletedName="PieRowDeleted" msprop:Generator_RowClassName="PieRow" msprop:Generator_UserTableName="Pie" msprop:Generator_RowEvArgName="PieRowChangeEvent">
+        <xs:element name="Pie" msprop:Generator_TableClassName="PieDataTable" msprop:Generator_TableVarName="tablePie" msprop:Generator_TablePropName="Pie" msprop:Generator_RowDeletingName="PieRowDeleting" msprop:Generator_RowChangingName="PieRowChanging" msprop:Generator_RowEvHandlerName="PieRowChangeEventHandler" msprop:Generator_RowDeletedName="PieRowDeleted" msprop:Generator_UserTableName="Pie" msprop:Generator_RowChangedName="PieRowChanged" msprop:Generator_RowEvArgName="PieRowChangeEvent" msprop:Generator_RowClassName="PieRow">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="Codigo" msprop:Generator_ColumnVarNameInTable="columnCodigo" msprop:Generator_ColumnPropNameInRow="Codigo" msprop:Generator_ColumnPropNameInTable="CodigoColumn" msprop:Generator_UserColumnName="Codigo" type="xs:long" />
@@ -70,8 +71,8 @@
   </xs:element>
   <xs:annotation>
     <xs:appinfo>
-      <msdata:Relationship name="Cabecera_Lineas" msdata:parent="Cabecera" msdata:child="Lineas" msdata:parentkey="Codigo" msdata:childkey="Codigo" msprop:Generator_UserChildTable="Lineas" msprop:Generator_ChildPropName="GetLineasRows" msprop:Generator_UserRelationName="Cabecera_Lineas" msprop:Generator_ParentPropName="CabeceraRow" msprop:Generator_RelationVarName="relationCabecera_Lineas" msprop:Generator_UserParentTable="Cabecera" />
-      <msdata:Relationship name="Cabecera_Pie" msdata:parent="Cabecera" msdata:child="Pie" msdata:parentkey="Codigo" msdata:childkey="Codigo" msprop:Generator_UserChildTable="Pie" msprop:Generator_ChildPropName="GetPieRows" msprop:Generator_UserRelationName="Cabecera_Pie" msprop:Generator_ParentPropName="CabeceraRow" msprop:Generator_RelationVarName="relationCabecera_Pie" msprop:Generator_UserParentTable="Cabecera" />
+      <msdata:Relationship name="Cabecera_Lineas" msdata:parent="Cabecera" msdata:child="Lineas" msdata:parentkey="Codigo" msdata:childkey="Codigo" msprop:Generator_UserChildTable="Lineas" msprop:Generator_ChildPropName="GetLineasRows" msprop:Generator_UserRelationName="Cabecera_Lineas" msprop:Generator_RelationVarName="relationCabecera_Lineas" msprop:Generator_UserParentTable="Cabecera" msprop:Generator_ParentPropName="CabeceraRow" />
+      <msdata:Relationship name="Cabecera_Pie" msdata:parent="Cabecera" msdata:child="Pie" msdata:parentkey="Codigo" msdata:childkey="Codigo" msprop:Generator_UserChildTable="Pie" msprop:Generator_ChildPropName="GetPieRows" msprop:Generator_UserRelationName="Cabecera_Pie" msprop:Generator_RelationVarName="relationCabecera_Pie" msprop:Generator_UserParentTable="Cabecera" msprop:Generator_ParentPropName="CabeceraRow" />
     </xs:appinfo>
   </xs:annotation>
 </xs:schema>

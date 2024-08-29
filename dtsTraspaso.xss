@@ -7,11 +7,11 @@
 <DiagramLayout xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ex:showrelationlabel="False" ViewPortX="0" ViewPortY="0" xmlns:ex="urn:schemas-microsoft-com:xml-msdatasource-layout-extended" xmlns="urn:schemas-microsoft-com:xml-msdatasource-layout">
   <Shapes>
     <Shape ID="DesignTable:Cabecera" ZOrder="5" X="70" Y="70" Height="200" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="196" />
-    <Shape ID="DesignTable:Lineas" ZOrder="4" X="374" Y="33" Height="200" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="196" />
-    <Shape ID="DesignTable:Pie" ZOrder="3" X="377" Y="265" Height="105" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="101" />
+    <Shape ID="DesignTable:Lineas" ZOrder="1" X="374" Y="33" Height="239" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="235" />
+    <Shape ID="DesignTable:Pie" ZOrder="4" X="377" Y="308" Height="105" Width="150" AdapterExpanded="true" DataTableExpanded="true" OldAdapterHeight="0" OldDataTableHeight="0" SplitterPosition="101" />
   </Shapes>
   <Connectors>
-    <Connector ID="DesignRelation:Cabecera_Lineas" ZOrder="2" LineWidth="11">
+    <Connector ID="DesignRelation:Cabecera_Lineas" ZOrder="3" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>220</X>
@@ -23,7 +23,7 @@
         </Point>
       </RoutePoints>
     </Connector>
-    <Connector ID="DesignRelation:Cabecera_Pie" ZOrder="1" LineWidth="11">
+    <Connector ID="DesignRelation:Cabecera_Pie" ZOrder="2" LineWidth="11">
       <RoutePoints>
         <Point>
           <X>203</X>
@@ -31,11 +31,11 @@
         </Point>
         <Point>
           <X>203</X>
-          <Y>287</Y>
+          <Y>330</Y>
         </Point>
         <Point>
           <X>377</X>
-          <Y>287</Y>
+          <Y>330</Y>
         </Point>
       </RoutePoints>
     </Connector>

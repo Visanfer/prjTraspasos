@@ -45,7 +45,6 @@ Public Class clsTraspasoTemp
         Dim lsSql As String
         Dim loRecord As MySqlDataReader
 
-
         If mnTraspaso > 0 Then
             lsSql = "select * from traspasotemp where traspaso = " & mnTraspaso
         Else

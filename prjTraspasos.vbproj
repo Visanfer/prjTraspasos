@@ -143,18 +143,6 @@
       <Name>control</Name>
       <HintPath>..\..\dll\control.dll</HintPath>
     </Reference>
-    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\dll\CrystalDecisions.CrystalReports.Engine.dll</HintPath>
-    </Reference>
-    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\dll\CrystalDecisions.ReportSource.dll</HintPath>
-    </Reference>
-    <Reference Include="CrystalDecisions.Shared, Version=13.0.4000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\dll\CrystalDecisions.Shared.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.ReportViewer.Common, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\dll\Microsoft.ReportViewer.Common.dll</HintPath>
@@ -302,12 +290,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="rptSolTraspaso.vb">
-      <DependentUpon>rptSolTraspaso.rpt</DependentUpon>
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <SubType>Component</SubType>
-    </Compile>
     <Content Include="dtsTraspaso.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>dtsTraspaso.Designer.vb</LastGenOutput>
@@ -335,11 +317,8 @@
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="rdlcSolTraspaso.rdlc" />
     <EmbeddedResource Include="rdlcTraspaso.rdlc" />
-    <EmbeddedResource Include="rptSolTraspaso.rpt">
-      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
-      <LastGenOutput>rptSolTraspaso.vb</LastGenOutput>
-    </EmbeddedResource>
     <None Include="app.config" />
     <None Include="dtsTraspaso.xsc">
       <DependentUpon>dtsTraspaso.xsd</DependentUpon>
