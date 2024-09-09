@@ -1370,12 +1370,16 @@ Public Class frmSolTraspasos
         'loListado.SetDataSource(moDataTraspaso)
 
         ' impresion especial para la fabrica ********
+        Dim lbApaisado As Boolean = True
         If moImpresora.mnCodigo = 80 Then
-            moImpresora.msOrientacion = "V"
+            lsPapel = "A5"
+            moImpresora.msOrientacion = "H"
             moImpresora.msPapel = "A5"
         Else
+            lsPapel = "A4"
             moImpresora.msPapel = "A4"
         End If
+
         'If moSelImpresora.msDestino = "I" Then
         '    prjPrinterNet.mrImprimeReport(goUsuario, CType(loListado, CrystalDecisions.CrystalReports.Engine.ReportDocument), moImpresora, moSelImpresora.mnCopias)
         'Else
@@ -1390,9 +1394,9 @@ Public Class frmSolTraspasos
         loVisor.moReport.LocalReport.DataSources.Add(New ReportDataSource("Lineas", loTablaLineas))
         loVisor.moReport.LocalReport.EnableExternalImages = True
         If lsSalida.Equals("I") Then
-            loVisor.mrImprimir(lsPapel, False, moImpresora.msCola)
+            loVisor.mrImprimir(lsPapel, lbApaisado, moImpresora.msCola)
         Else
-            loVisor.mrVisualizar(lsPapel, False, moImpresora.msCola)
+            loVisor.mrVisualizar(lsPapel, lbApaisado, moImpresora.msCola)
         End If
 
         panCampos.Enabled = True

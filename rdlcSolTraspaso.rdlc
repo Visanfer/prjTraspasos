@@ -326,7 +326,7 @@
         <Top>0.38396cm</Top>
         <Left>1.29329cm</Left>
         <Height>1.2cm</Height>
-        <Width>18.00458cm</Width>
+        <Width>18.00457cm</Width>
         <Style>
           <Border>
             <Style>None</Style>
@@ -674,7 +674,6 @@
               </Style>
             </Textbox>
             <Textbox Name="Observaciones">
-              <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
               <Paragraphs>
                 <Paragraph>
