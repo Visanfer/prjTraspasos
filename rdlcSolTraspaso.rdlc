@@ -516,7 +516,7 @@
                       <Value>=First(Fields!Fecha.Value, "Cabecera")</Value>
                       <Style>
                         <FontSize>9pt</FontSize>
-                        <Format>d</Format>
+                        <Format>dd/MM/yyyy</Format>
                       </Style>
                     </TextRun>
                   </TextRuns>
