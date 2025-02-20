@@ -20,79 +20,61 @@ Public Class clsBusTraspasos
     Public mcolLineas As Collection
 
     Public Sub mrBuscaTraspasos()
-        Dim lconConexion As mySqlConnection = mfconConexionSQL(False)
-        If lconConexion.State = ConnectionState.Closed Then Exit Sub
 
         Dim loTraspaso As clsTraspaso
-        Dim loRecord As mySqlDataReader
         Dim lsSql As String
 
         mcolTraspasos = New Collection
         lsSql = "select * from tracabe " & mfsWhereOrden() & " order by cod_tra desc"
-        Dim loComando As New mySqlCommand(lsSql, lconConexion)
-        loRecord = loComando.ExecuteReader
-        While loRecord.Read
+        Dim loDatos As DataTable = New clsControlBD().mfoRecuperaDatos(False, lsSql, "tracabe")
+        For Each loRegistro As DataRow In loDatos.Rows
             loTraspaso = New clsTraspaso
-            loTraspaso.mrCargaDatos(loRecord)
+            loTraspaso.mrCargaDatos(loRegistro)
             loTraspaso.mbEsNuevo = False
             mcolTraspasos.Add(loTraspaso, loTraspaso.mpsCodigo)
-        End While
-        loRecord.Close()
-        lconConexion.Close()
+        Next
 
     End Sub
 
     Public Sub mrBuscaTraspasosPendientes(ByVal lnOrden As Integer)
-        Dim lconConexion As mySqlConnection = mfconConexionSQL(False)
-        If lconConexion.State = ConnectionState.Closed Then Exit Sub
 
         Dim loTraspaso As clsTraspaso
         Dim loLinea As clsTraspasoLin
-        Dim loFuente As mySqlDataReader
-        Dim lsSql As String
+
 
         mcolLineas = New Collection
         mcolTraspasos = New Collection
-        lsSql = "select * from tracabe left join traline" &
+        Dim lsSql As String = "select * from tracabe left join traline" &
             " on tracabe.emp_tra=traline.emp_lin And tracabe.cod_tra=traline.cod_lin" &
             " where emp_tra = " & mnEmpresa &
             " and has_tra = " & mnHasta &
             " and est_lin='N'"
-        'lsSql = "select b.* from tracabe a, traline b where" & _
-        '        " a.emp_tra = b.emp_lin and a.cod_tra = b.cod_lin" & _
-        '        " and b.emp_lin = " & mnEmpresa & _
-        '        " and b.est_lin = 'N'" & _
-        '        " and a.has_tra = " & mnHasta
         If lnOrden = 1 Then
             lsSql = lsSql & " order by cod_lin,lin_lin asc"
         Else
             lsSql = lsSql & " order by des_lin,cod_lin asc"
         End If
-        Dim loComando As New mySqlCommand(lsSql, lconConexion)
-        loFuente = loComando.ExecuteReader
-        While loFuente.Read
+        Dim loDatos As DataTable = New clsControlBD().mfoRecuperaDatos(False, lsSql, "tracabe")
+        For Each loRegistro As DataRow In loDatos.Rows
             loLinea = New clsTraspasoLin
-            loLinea.mnEmpresa = mfnInteger(loFuente("emp_lin") & "")
-            loLinea.mnCodigo = mfnLong(loFuente("cod_lin") & "")
-            loLinea.mnLinea = mfnInteger(loFuente("lin_lin") & "")
-            loLinea.mnArticulo = mfnLong(loFuente("art_lin") & "")
-            loLinea.mnDetalle = mfnInteger(loFuente("det_lin") & "")
-            loLinea.msDescripcion = Trim(loFuente("des_lin") & "")
-            loLinea.mnCantidad = mfnDouble(loFuente("ctd_lin") & "")
-            loLinea.msEstado = Trim(loFuente("est_lin") & "")
+            loLinea.mnEmpresa = mfnInteger(loRegistro("emp_lin") & "")
+            loLinea.mnCodigo = mfnLong(loRegistro("cod_lin") & "")
+            loLinea.mnLinea = mfnInteger(loRegistro("lin_lin") & "")
+            loLinea.mnArticulo = mfnLong(loRegistro("art_lin") & "")
+            loLinea.mnDetalle = mfnInteger(loRegistro("det_lin") & "")
+            loLinea.msDescripcion = Trim(loRegistro("des_lin") & "")
+            loLinea.mnCantidad = mfnDouble(loRegistro("ctd_lin") & "")
+            loLinea.msEstado = Trim(loRegistro("est_lin") & "")
             loLinea.mbEsNuevo = False
             mcolLineas.Add(loLinea, loLinea.mpsCodigo)
 
             loTraspaso = New clsTraspaso
-            loTraspaso.mrCargaDatos(loFuente)
+            loTraspaso.mrCargaDatos(loRegistro)
             loTraspaso.mbEsNuevo = False
             On Error Resume Next
             mcolTraspasos.Add(loTraspaso, loTraspaso.mpsCodigo)
             On Error GoTo 0
-
-        End While
-        loFuente.Close()
-        lconConexion.Close()
+        Next
 
     End Sub
 
@@ -116,12 +98,12 @@ Public Class clsBusTraspasos
 
         If Format(mdHastaFecha, "dd/MM/yyyy") <> "01/01/1900" Then
             If Format(mdDesdeFecha, "dd/MM/yyyy") <> "01/01/1900" Then
-                lsWhere = lsWhere & " date(fec_tra) >= '" & Format(mdDesdeFecha, "yyyy/MM/dd") & "' and"
-                lsWhere = lsWhere & " date(fec_tra) <= '" & Format(mdHastaFecha, "yyyy/MM/dd") & "' and"
+                lsWhere = lsWhere & " fec_tra >= '" & Format(mdDesdeFecha, formatoFecha) & "' and"
+                lsWhere = lsWhere & " fec_tra <= '" & Format(mdHastaFecha, formatoFecha) & "' and"
             End If
         Else
             If Format(mdFecha, "dd/MM/yyyy") <> "01/01/1900" Then
-                lsWhere = lsWhere & " date(fec_tra) = '" & Format(mdFecha, "yyyy/MM/dd") & "' and"
+                lsWhere = lsWhere & " fec_tra = '" & Format(mdFecha, formatoFecha) & "' and"
             End If
         End If
 

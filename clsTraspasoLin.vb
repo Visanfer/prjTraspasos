@@ -190,7 +190,7 @@ Public Class clsTraspasoLin
             Dim lsSql As String = "select * from traline_log where empresa = " & mnEmpresa &
                                 " and codigo = " & mnCodigo &
                                 " and linea = " & mnLinea &
-                                " and articulo = " & mnArticulo &
+                                 " and articulo = " & mnArticulo &
                                 " and detalle = " & mnDetalle
             Dim loDatos As DataTable = New prjControl.clsControlBD().mfoRecuperaDatos(False, lsSql, "confirmacion")
 

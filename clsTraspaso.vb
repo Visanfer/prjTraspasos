@@ -271,27 +271,19 @@ Public Class clsTraspaso
     End Sub
 
     Public Sub mrRecuperaDatos()
-        Dim lconConexion As mySqlConnection = mfconConexionSQL(False)
-        If lconConexion.State = ConnectionState.Closed Then Exit Sub
 
-        Dim lsSql As String
-        Dim loRecord As mySqlDataReader
-
-        lsSql = "select * from tracabe where emp_tra = " & mnEmpresa & _
+        Dim lsSql As String = "select * from tracabe where emp_tra = " & mnEmpresa &
                 " and cod_tra = " & mnCodigo
-        Dim loComando As New mySqlCommand(lsSql, lconConexion)
-        loRecord = loComando.ExecuteReader
+        Dim loDatos As DataTable = New clsControlBD().mfoRecuperaDatos(False, lsSql, "tracabe")
         mbEsNuevo = True
-        While loRecord.Read
-            mrCargaDatos(loRecord)
+        For Each loRegistro As DataRow In loDatos.Rows
+            mrCargaDatos(loRegistro)
             mbEsNuevo = False
-        End While
-        loRecord.Close()
-        lconConexion.Close()
+        Next
 
     End Sub
 
-    Public Sub mrCargaDatos(ByVal loRecord As mySqlDataReader)
+    Public Sub mrCargaDatos(ByVal loRecord As DataRow)
         mnEmpresa = mfnInteger(loRecord("emp_tra") & "")
         mnCodigo = mfnLong(loRecord("cod_tra") & "")
         mnDesde = mfnInteger(loRecord("des_tra") & "")
