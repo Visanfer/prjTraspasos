@@ -2184,7 +2184,10 @@ Public Class frmTraspasos
         moImpresora.mnEmpresa = mnEmpresa
         moImpresora.mnCodigo = moSelImpresora.mnImpresora
         moImpresora.mrRecuperaDatos()
-
+        If moImpresora.mbEsNuevo Then
+            MsgBox("Impresora no instalada", MsgBoxStyle.Critical, "Visanfer .Net")
+            Exit Sub
+        End If
         If moSelImpresora.msPapel <> "" Then moImpresora.msPapel = moSelImpresora.msPapel
         mrImprimirRpt(moImpresora.mnCodigo, moSelImpresora.mnCopias, moSelImpresora.msDestino, moSelImpresora.msPapel)
 
